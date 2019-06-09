@@ -19,13 +19,13 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@Column(length = 50)
-	private String Name;
+	private String name;
 	@Column(length = 320)
 	private String email;
 	@Column(length = 100)
 	private String password;
 	@OneToMany
-	@JoinColumn(name = "deckID")
+	@JoinColumn(name = "deckId")
     private Set<Deck> decks = new HashSet<Deck>();
 
 	// default constructor
@@ -50,11 +50,11 @@ public class User {
 	}
 
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	public void setName(String name) {
-		Name = name;
+		name = name;
 	}
 
 	public String getEmail() {

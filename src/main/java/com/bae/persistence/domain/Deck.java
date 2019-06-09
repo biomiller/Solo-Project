@@ -11,11 +11,9 @@ public class Deck {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int deckID;
+	private int deckId;
 	@Column(length = 50)
 	private String Name;
-/*	@Column(length = 320)
-	private int userId;*/
 	@Column(length = 100)
 	private String format;
 
