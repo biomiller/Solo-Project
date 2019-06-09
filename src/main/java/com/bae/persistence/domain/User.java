@@ -3,6 +3,7 @@ package com.bae.persistence.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,15 +18,14 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int userId;
 	@Column(length = 50)
 	private String name;
 	@Column(length = 320)
 	private String email;
 	@Column(length = 100)
 	private String password;
-	@OneToMany
-	@JoinColumn(name = "deckId")
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Deck> decks = new HashSet<Deck>();
 
 	// default constructor
@@ -35,18 +35,13 @@ public class User {
 
 	
 	
-	
-	
-	
-	
-	
-	
+
 	public int getId() {
-		return id;
+		return userId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getName() {
@@ -54,7 +49,7 @@ public class User {
 	}
 
 	public void setName(String name) {
-		name = name;
+		this.name = name;
 	}
 
 	public String getEmail() {
