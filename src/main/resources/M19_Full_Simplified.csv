@@ -1,4 +1,4 @@
-name,mana_cost,cmc,type_line,oracle_text,loyalty,power,toughness,Colors__001,colors__002,colors__003,egalities__standard,legalities__pauper,set,collector_number,rarity,flavor_text,artist
+name,mana_cost,cmc,type_line,oracle_text,loyalty,power,toughness,colours__001,colorus__002,colours__003,egalities__standard,legalities__pauper,set,collector_number,rarity,flavour_text,artist
 Abnormal Endurance,"{1},{B}",2,Instant,"Until end of turn, target creature gets +2/+0 and gains ""When this creature dies, return it to the battlefield tapped under its owner's control.""",,,,B,,,legal,legal,m19,85,common,Tenacity prevails when hopes die.,Tomasz Jedruszek
 Act of Treason,"{2},{R}",3,Sorcery,Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.,,,,R,,,legal,legal,m19,127,common,She learned a tragic lesson that day: even the purest can be corrupted when the heart's emotions are twisted.,Eric Deschamps
 Aegis of the Heavens,"{1},{W}",2,Instant,Target creature gets +1/+7 until end of turn.,,,,W,,,legal,not_legal,m19,1,uncommon,Inner strength is never seen until it makes all the difference.,Anthony Palumbo
