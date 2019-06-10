@@ -1,14 +1,9 @@
 package com.bae.persistence.domain;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 @Entity
 public class Card {
@@ -33,8 +28,6 @@ public class Card {
 	private String flavour_text;
 	private String artist;
 	
-	@ManyToMany(mappedBy = "cards", cascade = CascadeType.ALL)
-    private Set<Deck> decks = new HashSet<Deck>();
 
 	
 	public Card() {
