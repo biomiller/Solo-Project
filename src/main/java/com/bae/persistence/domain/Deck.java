@@ -20,7 +20,7 @@ public class Deck {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int deckId;
 	@Column(length = 50)
-	private String Name;
+	private String name;
 	@Column(length = 100)
 	private String format;
 	@ManyToOne (cascade = CascadeType.PERSIST)
@@ -46,12 +46,12 @@ public class Deck {
 
 
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 
 
