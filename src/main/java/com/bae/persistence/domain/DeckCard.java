@@ -12,7 +12,7 @@ import javax.persistence.OneToOne;
 public class DeckCard {
 	
     @Id 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int deckCardnumber;
     @ManyToOne(cascade=CascadeType.PERSIST) 
     private Card card;

@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 public class Deck {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int deckId;
 	@Column(length = 50)
 	private String Name;

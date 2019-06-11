@@ -1,5 +1,6 @@
 package com.bae.persistence.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,23 +10,30 @@ import javax.persistence.Id;
 public class Card {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cardId;
 	private String name;
 	private String mana_cost;
 	private int cmc;
 	private String type_line;
+	@Column(length = 1000)
 	private String oracle_text;
-	private int loyalty;
-	private int power;
-	private int toughness;
+	@Column(nullable = true)
+	private String loyalty;
+	@Column(nullable = true)
+	private String power;
+	@Column(nullable = true)
+	private String toughness;
+	@Column(nullable = true)
 	private char colours_001;
+	@Column(nullable = true)
 	private char colours_002;
+	@Column(nullable = true)
 	private char colours_003;
 	private String set;
 	private int collector_number;
 	private String rarity;
-	private String flavour_text;
+	private String flavor_text;
 	private String artist;
 	
 
@@ -125,10 +133,10 @@ public class Card {
 		this.rarity = rarity;
 	}
 	public String getFlavour_text() {
-		return flavour_text;
+		return flavor_text;
 	}
 	public void setFlavour_text(String flavour_text) {
-		this.flavour_text = flavour_text;
+		this.flavor_text = flavour_text;
 	}
 	public String getArtist() {
 		return artist;
