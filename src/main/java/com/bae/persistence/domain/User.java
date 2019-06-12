@@ -23,7 +23,7 @@ public class User {
 	private String email;
 	@Column(length = 100)
 	private String password;
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Deck> decks = new HashSet<Deck>();
 
 	// default constructor

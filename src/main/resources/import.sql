@@ -1,4 +1,13 @@
 
+INSERT INTO USER(name, email, password) VALUES ('Owen', 'dummyemail@mail.com', 'password');
+
+INSERT INTO DECK(name,format,cards) VALUES ('DraftM1901', 'M19', '1 Angel of the Dawn, 1 Boggart Brute, 2 Cavalry Drillmaster, 1 Dismissive Pyromancer, 1 Gallant Cavalry, 1 Goblin Instigator, 1 Goblin Motivator, 1 Goblin Trashmaster, 2 Guttersnipe, 1 Inferno Hellion, 1 Lena, Selfless Champion, 1 Leonin Vanguard, 1 Oreskos Swiftclaw, 1 Viashino Pyromancer, 1 Volley Veteran, 1 Act of Treason, 1 Take Vengeance, 1 Tormenting Voice, 1 Shock, 2 Sure Strike, 10 Mountain, 7 Plains');
+
+INSERT INTO USER_DECK(user_userId,decks_deckId) VALUES(1,1)
+
+
+
+
 INSERT INTO CARD(name,mana_cost,cmc,type_line,oracle_text,loyalty,power,toughness,colours_001,colours_002,colours_003,set,collector_number,rarity,flavor_text,artist) VALUES ('Abnormal Endurance','{1},{B}',2,'Instant','Until end of turn, target creature gets +2/+0 and gains "When this creature dies, return it to the battlefield tapped under its owner''s control."',NULL,NULL,NULL,'B',NULL,NULL,'m19',85,'common','Tenacity prevails when hopes die.','Tomasz Jedruszek');
 INSERT INTO CARD(name,mana_cost,cmc,type_line,oracle_text,loyalty,power,toughness,colours_001,colours_002,colours_003,set,collector_number,rarity,flavor_text,artist) VALUES ('Act of Treason','{2},{R}',3,'Sorcery','Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.',NULL,NULL,NULL,'R',NULL,NULL,'m19',127,'common','She learned a tragic lesson that day: even the purest can be corrupted when the heart''s emotions are twisted.','Eric Deschamps');
 INSERT INTO CARD(name,mana_cost,cmc,type_line,oracle_text,loyalty,power,toughness,colours_001,colours_002,colours_003,set,collector_number,rarity,flavor_text,artist) VALUES ('Aegis of the Heavens','{1},{W}',2,'Instant','Target creature gets +1/+7 until end of turn.',NULL,NULL,NULL,'W',NULL,NULL,'m19',1,'uncommon','Inner strength is never seen until it makes all the difference.','Anthony Palumbo');
