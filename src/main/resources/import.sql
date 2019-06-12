@@ -3,7 +3,10 @@ INSERT INTO USER(name, email, password) VALUES ('Owen', 'dummyemail@mail.com', '
 
 INSERT INTO DECK(name,format,cards) VALUES ('DraftM1901', 'M19', '1 Angel of the Dawn, 1 Boggart Brute, 2 Cavalry Drillmaster, 1 Dismissive Pyromancer, 1 Gallant Cavalry, 1 Goblin Instigator, 1 Goblin Motivator, 1 Goblin Trashmaster, 2 Guttersnipe, 1 Inferno Hellion, 1 Lena, Selfless Champion, 1 Leonin Vanguard, 1 Oreskos Swiftclaw, 1 Viashino Pyromancer, 1 Volley Veteran, 1 Act of Treason, 1 Take Vengeance, 1 Tormenting Voice, 1 Shock, 2 Sure Strike, 10 Mountain, 7 Plains');
 
-INSERT INTO USER_DECK(user_userId,decks_deckId) VALUES(1,1)
+-- INSERT INTO USER_DECK(user_userId,decks_deckId) VALUES(1,1)
+
+update DECK set user_userId = 1 where deckId = 1;
+
 
 
 

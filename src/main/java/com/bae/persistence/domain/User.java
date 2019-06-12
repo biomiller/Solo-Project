@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -24,6 +25,7 @@ public class User {
 	@Column(length = 100)
 	private String password;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "user_userId")
     private Set<Deck> decks = new HashSet<Deck>();
 
 	// default constructor
