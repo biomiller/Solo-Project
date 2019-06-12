@@ -1,6 +1,6 @@
-package com.bae.persistence.repository;
+package com.bae.business;
 
-public interface UserRepository {
+public interface UserService {
 	
 	String getAllUsers();
 	String createUser(String user);

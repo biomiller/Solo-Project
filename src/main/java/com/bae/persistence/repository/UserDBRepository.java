@@ -40,7 +40,7 @@ public class UserDBRepository implements UserRepository{
 	}
 
 	@Override
-	public String createUser(String account) {
+	public String createUser(String user) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -52,7 +52,7 @@ public class UserDBRepository implements UserRepository{
 	}
 
 	@Override
-	public String updateUser(int id, String account) {
+	public String updateUser(int id, String user) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -3,9 +3,9 @@ package com.bae.persistence.repository;
 public interface DeckRepository {
 	
 	String getAllDecks();
-	String createDeck(String account);
+	String createDeck(String deck);
 	String deleteDeck(int id);
-	String updateDeck(int id, String account);
+	String updateDeck(int id, String deck);
 	String getDeck(int id);
 
 }
