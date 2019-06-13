@@ -33,27 +33,46 @@ public class DeckDBRepository implements DeckRepository {
 	}
 
 	@Override
+	public String getDeck(int id) {
+		return util.getJSONForObject(manager.find(Deck.class, id));
+	}
+	
+	@Override
 	public String createDeck(String deck) {
-		// TODO Auto-generated method stub
-		return null;
+		Deck newDeck = util.getObjectForJSON(deck, Deck.class);
+		manager.persist(newDeck);
+		return "{\"message\": \"Deck successfully added.\"}";
 	}
 
 	@Override
 	public String deleteDeck(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		if(manager.contains(manager.find(Deck.class, id))) {
+			manager.remove(manager.find(Deck.class, id));
+		}
+		return "{\"message\": \"Deck deleted.\"}";
 	}
 
 	@Override
 	public String updateDeck(int id, String deck) {
-		// TODO Auto-generated method stub
-		return null;
+		Deck compDeck = util.getObjectForJSON(deck, Deck.class);
+		Deck oldDeck = manager.find(Deck.class, id);
+		
+		if(oldDeck != null) {
+			if(compDeck.getCards() != null) {
+				oldDeck.setCards(compDeck.getCards());
+			}
+			if(compDeck.getName() != null) {
+				oldDeck.setName(compDeck.getName());
+			}
+			if(compDeck.getFormat() != null) {
+				oldDeck.setFormat(compDeck.getFormat());
+			}
+			
+		}
+		return "{\"message\": \"Deck updated.\"}";
+
 	}
 
-	@Override
-	public String getDeck(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }

@@ -25,7 +25,7 @@ public class Deck {
 	private String cards;
 /*	@ManyToOne (cascade = CascadeType.ALL)
 	private User user;*/
-/*    @OneToMany(cascade=CascadeType.ALL, mappedBy="deck") 
+/*  @OneToMany(cascade=CascadeType.ALL, mappedBy="deck") 
 	private Set<DeckCard> cards = new HashSet<DeckCard>();*/
 
 
@@ -65,6 +65,19 @@ public class Deck {
 	}
 
 
+	public String getCards() {
+		return cards;
+	}
+
+
+	public void setCards(String cards) {
+		this.cards = cards;
+	}
+	
+
+
+
+
 
 
 /*	public User getUser() {
@@ -77,15 +90,6 @@ public class Deck {
 	}*/
 
 
-/*	public Set<DeckCard> getCards() {
-		return cards;
-	}
-
-
-	public void setCards(Set<DeckCard> cards) {
-		this.cards = cards;
-	}
-*/
 
 
 
