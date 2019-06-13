@@ -33,6 +33,4 @@ public class UserServiceImpl implements UserService{
 		return userRepo.updateUser(id, user);
 	}
 
-
-
 }

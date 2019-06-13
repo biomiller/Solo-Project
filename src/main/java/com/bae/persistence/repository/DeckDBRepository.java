@@ -1,5 +1,6 @@
 package com.bae.persistence.repository;
 
+import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
 
 import java.util.Collection;
@@ -38,6 +39,7 @@ public class DeckDBRepository implements DeckRepository {
 	}
 	
 	@Override
+	@Transactional(REQUIRED)
 	public String createDeck(String deck) {
 		Deck newDeck = util.getObjectForJSON(deck, Deck.class);
 		manager.persist(newDeck);
@@ -45,6 +47,7 @@ public class DeckDBRepository implements DeckRepository {
 	}
 
 	@Override
+	@Transactional(REQUIRED)
 	public String deleteDeck(int id) {
 		if(manager.contains(manager.find(Deck.class, id))) {
 			manager.remove(manager.find(Deck.class, id));
@@ -53,6 +56,7 @@ public class DeckDBRepository implements DeckRepository {
 	}
 
 	@Override
+	@Transactional(REQUIRED)
 	public String updateDeck(int id, String deck) {
 		Deck compDeck = util.getObjectForJSON(deck, Deck.class);
 		Deck oldDeck = manager.find(Deck.class, id);
@@ -70,7 +74,6 @@ public class DeckDBRepository implements DeckRepository {
 			
 		}
 		return "{\"message\": \"Deck updated.\"}";
-
 	}
 
 
