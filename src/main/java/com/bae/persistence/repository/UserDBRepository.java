@@ -28,7 +28,7 @@ public class UserDBRepository implements UserRepository {
 
 	@Override
 	public String getAllUsers() {
-		Query query = manager.createQuery("Select u FROM User u");
+		Query query = manager.createQuery("Select a FROM User a");
 
 		Collection<User> users = (Collection<User>) query.getResultList();
 
