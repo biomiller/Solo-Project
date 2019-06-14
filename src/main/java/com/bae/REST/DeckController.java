@@ -23,17 +23,11 @@ public class DeckController {
 	}
 	
 	
-	@Path("getDeck")
+	@Path("getDeck/{id}")
 	@GET
 	@Produces({ "application/JSON" })
 	public String getDeck(@PathParam("id") int id) {
 		return service.getDeck(id);
 	}
 	
-	@Path("/createDeck")
-	@POST
-	@Produces({"application/json"})
-	public String createDeck(String deck) {
-		return service.createDeck(deck);
-	}
 }

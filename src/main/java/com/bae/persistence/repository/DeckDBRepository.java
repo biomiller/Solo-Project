@@ -38,15 +38,6 @@ public class DeckDBRepository implements DeckRepository {
 		return util.getJSONForObject(manager.find(Deck.class, id));
 	}
 	
-	@Override
-	@Transactional(REQUIRED)
-	public String createDeck(String deck) {
-		Deck newDeck = util.getObjectForJSON(deck, Deck.class);
-		manager.persist(newDeck);
-		return "{\"message\": \"Deck successfully added.\"}";
-	}
-
-	@Override
 	@Transactional(REQUIRED)
 	public String deleteDeck(int id) {
 		if(manager.contains(manager.find(Deck.class, id))) {
@@ -54,8 +45,7 @@ public class DeckDBRepository implements DeckRepository {
 		}
 		return "{\"message\": \"Deck deleted.\"}";
 	}
-
-	@Override
+	
 	@Transactional(REQUIRED)
 	public String updateDeck(int id, String deck) {
 		Deck compDeck = util.getObjectForJSON(deck, Deck.class);

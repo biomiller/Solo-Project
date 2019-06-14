@@ -33,4 +33,9 @@ public class UserServiceImpl implements UserService{
 		return userRepo.updateUser(id, user);
 	}
 
+	@Override
+	public String createDeck(int id, String deck) {
+		return userRepo.createDeck(id, deck);
+	}
+
 }

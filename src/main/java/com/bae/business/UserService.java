@@ -7,5 +7,6 @@ public interface UserService {
 	String deleteUser(int id);
 	String updateUser(int id, String user);
 	String getUser(int id);
+	String createDeck(int id, String deck);
 
 }

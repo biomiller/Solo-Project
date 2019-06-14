@@ -19,10 +19,6 @@ public class DeckServiceImpl implements DeckService {
 		return deckRepo.getDeck(id);
 	}
 
-	@Override
-	public String createDeck(String deck) {
-		return deckRepo.createDeck(deck);
-	}
 
 	@Override
 	public String deleteDeck(int id) {
@@ -33,5 +29,6 @@ public class DeckServiceImpl implements DeckService {
 	public String updateDeck(int id, String deck) {
 		return deckRepo.updateDeck(id, deck);
 	}
+
 
 }
