@@ -21,11 +21,11 @@ public class User {
 	private int userId;
 	@Column(length = 50)
 	private String name;
-	@Column(length = 320)
+	@Column(length = 320, unique = true)
 	private String email;
 	@Column(length = 100)
 	private String password;
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_userId")
     private Set<Deck> decks = new HashSet<Deck>();
 
