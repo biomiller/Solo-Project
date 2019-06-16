@@ -19,7 +19,7 @@ import com.bae.util.JSONUtil;
 @Default
 
 public class DeckDBRepository implements DeckRepository {
-	
+
 	@PersistenceContext(unitName = "primary")
 	private EntityManager manager;
 
@@ -37,37 +37,35 @@ public class DeckDBRepository implements DeckRepository {
 	public String getDeck(int id) {
 		return util.getJSONForObject(manager.find(Deck.class, id));
 	}
-	
+
 	@Override
 	@Transactional(REQUIRED)
 	public String deleteDeck(int id) {
-		if(manager.contains(manager.find(Deck.class, id))) {
+		if (manager.contains(manager.find(Deck.class, id))) {
 			manager.remove(manager.find(Deck.class, id));
 		}
 		return "{\"message\": \"Deck deleted.\"}";
 	}
-	
+
 	@Override
 	@Transactional(REQUIRED)
 	public String updateDeck(int id, String deck) {
 		Deck compDeck = util.getObjectForJSON(deck, Deck.class);
 		Deck oldDeck = manager.find(Deck.class, id);
-		
-		if(oldDeck != null) {
-			if(compDeck.getCards() != null) {
+
+		if (oldDeck != null) {
+			if (compDeck.getCards() != null) {
 				oldDeck.setCards(compDeck.getCards());
 			}
-			if(compDeck.getName() != null) {
+			if (compDeck.getName() != null) {
 				oldDeck.setName(compDeck.getName());
 			}
-			if(compDeck.getFormat() != null) {
+			if (compDeck.getFormat() != null) {
 				oldDeck.setFormat(compDeck.getFormat());
 			}
-			
+
 		}
 		return "{\"message\": \"Deck updated.\"}";
 	}
-
-
 
 }

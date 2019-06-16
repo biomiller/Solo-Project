@@ -29,9 +29,9 @@ public class User {
 	private String password;
 	@OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId")
-    private Set<Deck> decks = new HashSet<Deck>();
-	@ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JoinTable(name = "event_user", joinColumns = @JoinColumn(name = "user_userId", referencedColumnName = "userId"), inverseJoinColumns = @JoinColumn(name = "event_eventId", referencedColumnName = "eventId"))
+	private Set<Deck> decks = new HashSet<Deck>();
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
+	@JoinTable(name = "event_user", joinColumns = @JoinColumn(name = "user_userId", referencedColumnName = "userId"), inverseJoinColumns = @JoinColumn(name = "event_eventId", referencedColumnName = "eventId"))
 	private Set<Event> events = new HashSet<Event>();
 
 	// default constructor
@@ -79,16 +79,4 @@ public class User {
 		this.decks = decks;
 	}
 
-	
-	
-
-
-
-	
-	
-	
-	
 }
-
-
-
