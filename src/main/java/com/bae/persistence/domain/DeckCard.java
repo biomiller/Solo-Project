@@ -1,4 +1,4 @@
-package com.bae.persistence.domain;
+/*package com.bae.persistence.domain;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -53,3 +53,4 @@ public class DeckCard {
     
     
 }
+*/

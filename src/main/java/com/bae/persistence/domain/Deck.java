@@ -1,16 +1,14 @@
 package com.bae.persistence.domain;
 
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
 
 
 @Entity
@@ -23,10 +21,12 @@ public class Deck {
 	private String name;
 	@Column(length = 100)
 	private String format;
-	@ManyToOne (cascade = CascadeType.PERSIST)
-	private User user;
-    @OneToMany(cascade=CascadeType.ALL, mappedBy="deck") 
-	private Set<DeckCard> cards = new HashSet<DeckCard>();
+	@Column(length = 10000)
+	private String cards;
+/*	@ManyToOne (cascade = CascadeType.ALL)
+	private User user;*/
+/*  @OneToMany(cascade=CascadeType.ALL, mappedBy="deck") 
+	private Set<DeckCard> cards = new HashSet<DeckCard>();*/
 
 
 	// default constructor
@@ -65,24 +65,30 @@ public class Deck {
 	}
 
 
-	public User getUser() {
+	public String getCards() {
+		return cards;
+	}
+
+
+	public void setCards(String cards) {
+		this.cards = cards;
+	}
+	
+
+
+
+
+
+
+/*	public User getUser() {
 		return user;
 	}
 
 
 	public void setUser(User user) {
 		this.user = user;
-	}
+	}*/
 
-
-	public Set<DeckCard> getCards() {
-		return cards;
-	}
-
-
-	public void setCards(Set<DeckCard> cards) {
-		this.cards = cards;
-	}
 
 
 
