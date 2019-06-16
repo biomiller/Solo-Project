@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -26,8 +28,11 @@ public class User {
 	@Column(length = 100)
 	private String password;
 	@OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_userId")
+	@JoinColumn(name = "userId")
     private Set<Deck> decks = new HashSet<Deck>();
+	@ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinTable(name = "event_user", joinColumns = @JoinColumn(name = "user_userId", referencedColumnName = "userId"), inverseJoinColumns = @JoinColumn(name = "event_eventId", referencedColumnName = "eventId"))
+	private Set<Event> events = new HashSet<Event>();
 
 	// default constructor
 	public User() {
