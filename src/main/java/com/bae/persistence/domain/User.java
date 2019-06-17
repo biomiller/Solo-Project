@@ -15,6 +15,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.Proxy;
+
 @Entity
 public class User {
 
@@ -30,14 +34,24 @@ public class User {
 	@OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId")
 	private Set<Deck> decks = new HashSet<Deck>();
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
-	@JoinTable(name = "event_user", joinColumns = @JoinColumn(name = "user_userId", referencedColumnName = "userId"), inverseJoinColumns = @JoinColumn(name = "event_eventId", referencedColumnName = "eventId"))
-	private Set<Event> events = new HashSet<Event>();
+
 
 	// default constructor
 	public User() {
 		super();
 	}
+	
+	
+
+	public User(String name, String email, String password, Set<Deck> decks) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.decks = decks;
+	}
+
+
 
 	public int getUserId() {
 		return userId;

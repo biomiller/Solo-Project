@@ -27,7 +27,12 @@ UPDATE DECK SET userId = 2 WHERE deckId = 3;
 UPDATE DECK SET userId = 2 WHERE deckId = 4;
 
 INSERT INTO EVENT(name, location, eventDate) VALUES ('M19 Prerelease', 'Rogue Gaming', '2018-07-08');
-INSERT INTO EVENT_USER (event_eventId, user_userId) VALUES (1,1);
+INSERT INTO EVENT_USER (eventId, userId) VALUES (1,1);
+INSERT INTO EVENT_USER (eventId, userId) VALUES (1,2);
+
+INSERT INTO EVENT(name, location, eventDate) VALUES ('M19 Sealed', 'Rogue Gaming', '2018-07-09');
+INSERT INTO EVENT_USER (eventId, userId) VALUES (2,2);
+
 
 
 INSERT INTO CARD(name,mana_cost,cmc,type_line,oracle_text,loyalty,power,toughness,colours_001,colours_002,colours_003,set,collector_number,rarity,flavor_text,artist) VALUES ('Abnormal Endurance','{1},{B}',2,'Instant','Until end of turn, target creature gets +2/+0 and gains "When this creature dies, return it to the battlefield tapped under its owner''s control."',NULL,NULL,NULL,'B',NULL,NULL,'m19',85,'common','Tenacity prevails when hopes die.','Tomasz Jedruszek');

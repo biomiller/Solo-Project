@@ -53,8 +53,11 @@ public class UserDBRepository implements UserRepository {
 	public String deleteUser(int id) {
 		if (manager.contains(manager.find(User.class, id))) {
 			manager.remove(manager.find(User.class, id));
-		}
 		return "{\"message\": \"User deleted.\"}";
+		}
+		else {
+			return "{\"message\": \"User not found.\"}";
+		}
 	}
 
 	@Override
@@ -87,6 +90,14 @@ public class UserDBRepository implements UserRepository {
 		manager.find(User.class, id).getDecks().add(newDeck);
 		manager.persist(newDeck);
 		return "{\"message\": \"Deck successfully added.\"}";
+	}
+	
+	public void setManager(EntityManager manager) {
+		this.manager = manager;
+	}
+	
+	public void setUtil(JSONUtil util) {
+		this.util = util;
 	}
 
 }
