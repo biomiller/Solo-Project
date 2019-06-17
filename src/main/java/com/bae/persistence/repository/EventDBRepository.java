@@ -61,4 +61,11 @@ public class EventDBRepository implements EventRepository {
 		return "{\"message\": \"User successfully added to event.\"}";
 	}
 
+	public void setManager(EntityManager manager) {
+		this.manager = manager;
+	}
+	
+	public void setUtil(JSONUtil util) {
+		this.util = util;
+	}
 }

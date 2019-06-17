@@ -74,9 +74,9 @@ public class UserDBRepositoryTest {
 		
 		User user = new User("Owen","dummyemail@gmail.com","password",decks);
 		
-		Mockito.when(manager.find(User.class,1)).thenReturn(user);
+		Mockito.when(manager.find(User.class,0)).thenReturn(user);
 		
-		assertEquals(Constants.MOCK_USER_OBJECT, repo.getUser(1));
+		assertEquals(Constants.MOCK_USER_OBJECT, repo.getUser(0));
 		
 	}
 	
@@ -101,6 +101,68 @@ public class UserDBRepositoryTest {
 		assertEquals(reply, "{\"message\": \"User not found.\"}");
 	}
 	
+	@Test
+	public void testUpdateUser() {
+		Set<Deck> decks = new HashSet<Deck>();
+		Deck deck = new Deck();
+		decks.add(deck);
+		
+		User user = new User("Owen","dummyemail@gmail.com","password",decks);
+		User compUser = new User("Dave","fakeemail@gmail.com","login",decks);
+
+		Mockito.when(manager.find(User.class, 1)).thenReturn(user);
+			
+		String reply = repo.updateUser(1,util.getJSONForObject(compUser));
+		assertEquals(reply, "{\"message\": \"User updated.\"}");
+		
+	}
+	
+	@Test
+	public void testUpdateUserNotExist() {
+		Set<Deck> decks = new HashSet<Deck>();
+		Deck deck = new Deck();
+		decks.add(deck);
+		
+		User user = new User("Owen","dummyemail@gmail.com","password",decks);
+		User compUser = new User("Dave","fakeemail@gmail.com","login",decks);
+
+		Mockito.when(manager.find(User.class, 2)).thenReturn(null);
+			
+		String reply = repo.updateUser(1,util.getJSONForObject(compUser));
+		assertEquals(reply, "{\"message\": \"User not found.\"}");
+		
+	}
+	
+	@Test
+	public void testUpdateUserNullValues() {
+		Set<Deck> decks = new HashSet<Deck>();
+		Deck deck = new Deck();
+		decks.add(deck);
+		
+		User user = new User("Owen","dummyemail@gmail.com","password",decks);
+		User compUser = new User(null,null,null,null);
+
+		Mockito.when(manager.find(User.class, 1)).thenReturn(user);
+			
+		String reply = repo.updateUser(1,util.getJSONForObject(compUser));
+		assertEquals(reply, "{\"message\": \"User updated.\"}");
+		
+	}
+	
+	@Test
+	public void createDeckTest() {
+		Set<Deck> decks = new HashSet<Deck>();
+		Deck deck = new Deck();
+		decks.add(deck);
+		User user = new User("Owen","dummyemail@gmail.com","password",decks);
+		
+		Deck newDeck = new Deck();
+		
+		Mockito.when(manager.find(User.class, 1)).thenReturn(user);
+		
+		String reply = repo.createDeck(1, util.getJSONForObject(newDeck));
+		assertEquals(reply, "{\"message\": \"Deck successfully added.\"}");
+	}
 	
 	
 }

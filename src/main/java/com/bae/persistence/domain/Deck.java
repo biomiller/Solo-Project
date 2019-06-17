@@ -31,6 +31,16 @@ public class Deck {
 	public Deck() {
 		super();
 	}
+	
+
+
+	public Deck(String name, String format, String cards) {
+		super();
+		this.name = name;
+		this.format = format;
+		this.cards = cards;
+	}
+
 
 
 	public int getDeckId() {

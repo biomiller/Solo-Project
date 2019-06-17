@@ -43,8 +43,10 @@ public class DeckDBRepository implements DeckRepository {
 	public String deleteDeck(int id) {
 		if (manager.contains(manager.find(Deck.class, id))) {
 			manager.remove(manager.find(Deck.class, id));
+			return "{\"message\": \"Deck deleted.\"}";
+		} else {
+			return "{\"message\": \"Deck not found.\"}";
 		}
-		return "{\"message\": \"Deck deleted.\"}";
 	}
 
 	@Override
@@ -64,8 +66,18 @@ public class DeckDBRepository implements DeckRepository {
 				oldDeck.setFormat(compDeck.getFormat());
 			}
 
+			return "{\"message\": \"Deck updated.\"}";
+		} else {
+			return "{\"message\": \"Deck not found.\"}";
 		}
-		return "{\"message\": \"Deck updated.\"}";
+	}
+
+	public void setManager(EntityManager manager) {
+		this.manager = manager;
+	}
+
+	public void setUtil(JSONUtil util) {
+		this.util = util;
 	}
 
 }

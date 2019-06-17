@@ -78,9 +78,12 @@ public class UserDBRepository implements UserRepository {
 			}
 
 			manager.persist(oldUser);
+			return "{\"message\": \"User updated.\"}";
 
 		}
-		return "{\"message\": \"User updated.\"}";
+		else {
+			return "{\"message\": \"User not found.\"}";
+		}
 	}
 
 	@Override
