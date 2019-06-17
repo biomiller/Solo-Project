@@ -20,7 +20,7 @@ import com.bae.util.JSONUtil;
 @Transactional(SUPPORTS)
 @Default
 public class EventDBRepository implements EventRepository {
-	
+
 	@PersistenceContext(unitName = "primary")
 	private EntityManager manager;
 
@@ -32,26 +32,59 @@ public class EventDBRepository implements EventRepository {
 		Query query = manager.createQuery("Select a FROM Event a");
 		Collection<Event> events = (Collection<Event>) query.getResultList();
 		return util.getJSONForObject(events);
-	}  
+	}
 
 	@Override
 	public String getEvent(int id) {
 		return util.getJSONForObject(manager.find(Event.class, id));
-		
-	}
 
-	@Override
-	public String deleteEvent(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String updateEvent(int id, String event) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
+	@Override
+	@Transactional(REQUIRED)
+	public String createEvent(String event) {
+		Event newEvent = util.getObjectForJSON(event, Event.class);
+		manager.persist(newEvent);
+		return "{\"message\": \"Event successfully created.\"}";
+	}
+
+	@Override
+	@Transactional(REQUIRED)
+	public String deleteEvent(int id) {
+		if (manager.contains(manager.find(Event.class, id))) {
+			manager.remove(manager.find(Event.class, id));
+			return "{\"message\": \"Event deleted.\"}";
+		} else {
+			return "{\"message\": \"Event not found.\"}";
+		}
+	}
+
+	@Override
+	@Transactional(REQUIRED)
+	public String updateEvent(int id, String event) {
+		Event compEvent = util.getObjectForJSON(event, Event.class);
+		Event oldEvent = manager.find(Event.class, id);
+
+		if (oldEvent != null) {
+			if (compEvent.getEventDate() != null) {
+				oldEvent.setEventDate(compEvent.getEventDate());
+			}
+			if (compEvent.getName() != null) {
+				oldEvent.setName(compEvent.getName());
+			}
+			if (compEvent.getFormat() != null) {
+				oldEvent.setFormat(compEvent.getFormat());
+			}
+			if (compEvent.getLocation() != null) {
+				oldEvent.setLocation(compEvent.getLocation());
+			}
+
+			return "{\"message\": \"Event updated.\"}";
+		} else {
+			return "{\"message\": \"Event not found.\"}";
+		}
+	}
+
 	@Override
 	@Transactional(REQUIRED)
 	public String addUser(int id, String user) {
@@ -64,7 +97,7 @@ public class EventDBRepository implements EventRepository {
 	public void setManager(EntityManager manager) {
 		this.manager = manager;
 	}
-	
+
 	public void setUtil(JSONUtil util) {
 		this.util = util;
 	}

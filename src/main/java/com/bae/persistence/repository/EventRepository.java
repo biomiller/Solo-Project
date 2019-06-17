@@ -7,6 +7,7 @@ public interface EventRepository {
 	String deleteEvent(int id);
 	String updateEvent(int id, String event);
 	String addUser(int id, String user);
+	String createEvent(String event);
 	
 
 }

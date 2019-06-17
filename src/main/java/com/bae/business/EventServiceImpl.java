@@ -4,8 +4,8 @@ import javax.inject.Inject;
 
 import com.bae.persistence.repository.EventDBRepository;
 
-public class EventServiceImpl implements EventService{
-	
+public class EventServiceImpl implements EventService {
+
 	@Inject
 	EventDBRepository eventRepo;
 
@@ -21,14 +21,12 @@ public class EventServiceImpl implements EventService{
 
 	@Override
 	public String deleteEvent(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return eventRepo.deleteEvent(id);
 	}
 
 	@Override
 	public String updateEvent(int id, String event) {
-		// TODO Auto-generated method stub
-		return null;
+		return eventRepo.updateEvent(id, event);
 	}
 
 	@Override
