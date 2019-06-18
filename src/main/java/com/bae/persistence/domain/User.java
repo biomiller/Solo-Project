@@ -15,10 +15,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-import org.hibernate.annotations.Proxy;
-
 @Entity
 public class User {
 
@@ -34,6 +30,9 @@ public class User {
 	@OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId")
 	private Set<Deck> decks = new HashSet<Deck>();
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+	@JoinTable(name = "event_user", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "eventId"))
+	private Set<Event> events;
 
 
 	// default constructor
@@ -43,12 +42,13 @@ public class User {
 	
 	
 
-	public User(String name, String email, String password, Set<Deck> decks) {
+	public User(String name, String email, String password, Set<Deck> decks, Set<Event> events) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.decks = decks;
+		this.events = events;
 	}
 
 
@@ -57,40 +57,72 @@ public class User {
 		return userId;
 	}
 
+
+
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+
+
 
 	public String getName() {
 		return name;
 	}
 
+
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
+
 
 	public String getEmail() {
 		return email;
 	}
 
+
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+
 
 	public String getPassword() {
 		return password;
 	}
 
+
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+
 
 	public Set<Deck> getDecks() {
 		return decks;
 	}
 
+
+
 	public void setDecks(Set<Deck> decks) {
 		this.decks = decks;
 	}
+
+
+
+	public Set<Event> getEvents() {
+		return events;
+	}
+
+
+
+	public void setEvents(Set<Event> events) {
+		this.events = events;
+	}
+
+
 
 }

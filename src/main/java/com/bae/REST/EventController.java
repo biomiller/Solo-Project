@@ -21,7 +21,7 @@ public class EventController {
 	@GET
 	@Produces({ "application/JSON" })
 	public String getAllEvents() {
-		return service.getAllEvents();
+		return service.getAllEvents(); 
 	}
 
 	@Path("getEvent/{id}")
@@ -31,12 +31,6 @@ public class EventController {
 		return service.getEvent(id);
 	}
 	
-	@Path("/addUser/{id}")
-	@POST
-	@Produces({"application/json"})
-	public String addUser(@PathParam("id") int id, String user) {
-		return service.addUser(id, user);
-	}
 	
 	@Path("/deleteEvent/{id}")
 	@DELETE
@@ -51,6 +45,15 @@ public class EventController {
 	public String updateEvent(@PathParam("id") int id, String event) {
 		return service.updateEvent(id, event);
 	}
+	
+	@Path("/createEvent")
+	@PUT
+	@Produces({"application/json"})
+	public String createEvent(String event) {
+		return service.createEvent(event);
+	}
+	
+	
 	
 	
 	

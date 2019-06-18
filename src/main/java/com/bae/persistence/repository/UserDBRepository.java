@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import com.bae.persistence.domain.Deck;
+import com.bae.persistence.domain.Event;
 import com.bae.persistence.domain.User;
 import com.bae.util.JSONUtil;
 
@@ -95,12 +96,22 @@ public class UserDBRepository implements UserRepository {
 		return "{\"message\": \"Deck successfully added.\"}";
 	}
 	
+	@Override
+	@Transactional(REQUIRED)
+	public String addEvent(int id, String event) {
+		Event newEvent = util.getObjectForJSON(event, Event.class); 
+		User user = manager.find(User.class, id);
+		user.getEvents().add(newEvent);
+		manager.persist(user);
+		return "{\"message\": \"Event successfully added to user.\"}";
+	} 
+	
 	public void setManager(EntityManager manager) {
 		this.manager = manager;
 	}
 	
 	public void setUtil(JSONUtil util) {
-		this.util = util;
+		this.util = util; 
 	}
 
 }

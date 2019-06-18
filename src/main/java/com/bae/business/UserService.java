@@ -8,5 +8,6 @@ public interface UserService {
 	String updateUser(int id, String user);
 	String getUser(int id);
 	String createDeck(int id, String deck);
+	String addEvent(int id, String event);
 
 }

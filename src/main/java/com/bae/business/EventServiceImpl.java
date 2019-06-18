@@ -29,10 +29,9 @@ public class EventServiceImpl implements EventService {
 		return eventRepo.updateEvent(id, event);
 	}
 
-	@Override
-	public String addUser(int id, String user) {
-		return eventRepo.addUser(id, user);
-
+	public String createEvent(String event) {
+		return eventRepo.createEvent(event);
 	}
+
 
 }

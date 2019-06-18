@@ -52,6 +52,13 @@ public class UserController {
 		return service.createDeck(id, deck);
 	}
 	
+	@Path("/addEvent/{id}")
+	@POST
+	@Produces({"application/json"})
+	public String addEvent(@PathParam("id") int id, String event) {
+		return service.addEvent(id, event);
+	}
+	
 	@Path("/updateUser/{id}")
 	@PUT
 	@Produces({"application/json"})

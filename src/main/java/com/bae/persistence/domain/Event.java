@@ -1,20 +1,12 @@
 package com.bae.persistence.domain;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Event {
@@ -26,14 +18,24 @@ public class Event {
 	private String name;
 	private String format;
 	private String location;
-	private Date eventDate;
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
-	@JoinTable(name = "event_user", joinColumns = @JoinColumn(name = "eventId"), inverseJoinColumns = @JoinColumn(name = "userId"))
-	private Set<User> users;
+	private String eventDate;
+
 
 	public Event() {
 		super();
 	}
+	
+	
+
+	public Event(String name, String format, String location, String eventDate) {
+		super();
+		this.name = name;
+		this.format = format;
+		this.location = location;
+		this.eventDate = eventDate;
+	}
+
+
 
 	public int getEventId() {
 		return eventId;
@@ -67,23 +69,12 @@ public class Event {
 		this.location = location;
 	}
 
-	public Date getEventDate() {
+	public String getEventDate() {
 		return eventDate;
 	}
 
-	public void setEventDate(Date eventDate) {
+	public void setEventDate(String eventDate) {
 		this.eventDate = eventDate;
 	}
-
-	public Set<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	}
-
-
-
 
 }

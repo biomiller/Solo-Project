@@ -43,7 +43,7 @@ public class EventDBRepository implements EventRepository {
 	@Override
 	@Transactional(REQUIRED)
 	public String createEvent(String event) {
-		Event newEvent = util.getObjectForJSON(event, Event.class);
+		Event newEvent = util.getObjectForJSON(event, Event.class); 
 		manager.persist(newEvent);
 		return "{\"message\": \"Event successfully created.\"}";
 	}
@@ -85,14 +85,7 @@ public class EventDBRepository implements EventRepository {
 		}
 	}
 
-	@Override
-	@Transactional(REQUIRED)
-	public String addUser(int id, String user) {
-		User newUser = util.getObjectForJSON(user, User.class);
-		manager.find(Event.class, id).getUsers().add(newUser);
-		manager.persist(newUser);
-		return "{\"message\": \"User successfully added to event.\"}";
-	}
+
 
 	public void setManager(EntityManager manager) {
 		this.manager = manager;

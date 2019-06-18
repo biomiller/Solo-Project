@@ -13,9 +13,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.mockito.stubbing.OngoingStubbing;
 
 import com.bae.persistence.domain.Deck;
+import com.bae.persistence.domain.Event;
 import com.bae.persistence.domain.User;
 import com.bae.persistence.repository.UserDBRepository;
 import com.bae.util.Constants;
@@ -41,15 +41,19 @@ public class UserServiceImplTest {
 		repo.setUtil(util);
 	}
 
-	@Test
+	@Test 
 	public void getAllUsersTest() {
     	
 		Set<Deck> decks = new HashSet<Deck>();
 		Deck deck = new Deck();
 		decks.add(deck);
 		
+		Set<Event> events = new HashSet<Event>();
+		Event event = new Event();
+		events.add(event); 
+		
 		ArrayList<User> users = new ArrayList<User>();
-		User user = new User("Owen","dummyemail@gmail.com","password",decks);
+		User user = new User("Owen","dummyemail@gmail.com","password",decks, events);
 		users.add(user);
 		
 		String retrievedUsers = util.getJSONForObject(users);
@@ -67,7 +71,11 @@ public class UserServiceImplTest {
 		Deck deck = new Deck();
 		decks.add(deck);
 		
-		User user = new User("Owen","dummyemail@gmail.com","password",decks);
+		Set<Event> events = new HashSet<Event>();
+		Event event = new Event();
+		events.add(event);
+		
+		User user = new User("Owen","dummyemail@gmail.com","password",decks, events);
 		
 		String retrievedUser = util.getJSONForObject(user);
 
@@ -92,16 +100,43 @@ public class UserServiceImplTest {
 	
 	@Test
 	public void testUpdateUser() {
-		Set<Deck> decks = new HashSet<Deck>();
+		Set<Deck> decks = new HashSet<Deck>(); 
 		Deck deck = new Deck();
 		decks.add(deck);
 		
-		User user = new User("Owen","dummyemail@gmail.com","password",decks);
-		User compUser = new User("Dave","fakeemail@gmail.com","login",decks);
+		Set<Event> events = new HashSet<Event>();
+		Event event = new Event();
+		events.add(event);
+		
+		User compUser = new User("Dave","fakeemail@gmail.com","login",decks, events);
 		
 		Mockito.when(repo.updateUser(0, util.getJSONForObject(compUser))).thenReturn("{\"message\": \"User updated.\"}");
 
 		assertEquals(service.updateUser(0,util.getJSONForObject(compUser)), "{\"message\": \"User updated.\"}");
+		
+	}
+	
+	@Test
+	public void testCreateDeck() {
+				
+		Deck newDeck = new Deck();
+		
+		Mockito.when(repo.createDeck(0, util.getJSONForObject(newDeck))).thenReturn("{\"message\": \"Deck successfully added.\"}");
+
+		assertEquals(service.createDeck(0, util.getJSONForObject(newDeck)), "{\"message\": \"Deck successfully added.\"}");
+		
+		
+	}
+	
+	@Test
+	public void testAddEvent() {
+				
+		Event newEvent = new Event();
+		
+		Mockito.when(repo.addEvent(0, util.getJSONForObject(newEvent))).thenReturn("{\"message\": \"Event successfully added to user.\"}");
+
+		assertEquals(service.addEvent(0, util.getJSONForObject(newEvent)), "{\"message\": \"Event successfully added to user.\"}");
+		
 		
 	}
 }
