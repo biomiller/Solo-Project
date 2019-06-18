@@ -63,7 +63,7 @@ public class UserDBRepositoryTest {
 		Mockito.when(query.getResultList()).thenReturn(users);
 		assertEquals(Constants.MOCK_USER_DATA_ARRAY, repo.getAllUsers());
 		
-	}
+	} 
 	
 	@Test
 	public void testGetUser() {
