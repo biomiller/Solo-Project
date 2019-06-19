@@ -38,4 +38,9 @@ public class UserServiceImpl implements UserService{
 		return userRepo.createDeck(id, deck);
 	}
 
+	@Override
+	public String addEvent(int userId, int eventId) {
+		return userRepo.addEvent(userId, eventId);
+	}
+
 }

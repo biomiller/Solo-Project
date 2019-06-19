@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import com.bae.persistence.domain.Deck;
+import com.bae.persistence.domain.Event;
 import com.bae.persistence.domain.User;
 import com.bae.util.JSONUtil;
 
@@ -53,8 +54,11 @@ public class UserDBRepository implements UserRepository {
 	public String deleteUser(int id) {
 		if (manager.contains(manager.find(User.class, id))) {
 			manager.remove(manager.find(User.class, id));
-		}
 		return "{\"message\": \"User deleted.\"}";
+		}
+		else {
+			return "{\"message\": \"User not found.\"}";
+		}
 	}
 
 	@Override
@@ -73,22 +77,41 @@ public class UserDBRepository implements UserRepository {
 			if (compUser.getEmail() != null) {
 				oldUser.setEmail(compUser.getEmail());
 			}
-		
+
 			manager.persist(oldUser);
+			return "{\"message\": \"User updated.\"}";
 
 		}
-		return "{\"message\": \"User updated.\"}";
+		else {
+			return "{\"message\": \"User not found.\"}";
+		}
 	}
 
-	
 	@Override
 	@Transactional(REQUIRED)
-	public String createDeck(int id,String deck) {
+	public String createDeck(int id, String deck) {
 		Deck newDeck = util.getObjectForJSON(deck, Deck.class);
 		manager.find(User.class, id).getDecks().add(newDeck);
 		manager.persist(newDeck);
 		return "{\"message\": \"Deck successfully added.\"}";
 	}
-
 	
+	@Override
+	@Transactional(REQUIRED)
+	public String addEvent(int userId, int eventId) {
+		Event event = manager.find(Event.class, eventId);
+		User user = manager.find(User.class, userId);
+		user.getEvents().add(event);
+		manager.persist(user);
+		return "{\"message\": \"Event successfully added to user.\"}";
+	} 
+	
+	public void setManager(EntityManager manager) {
+		this.manager = manager;
+	}
+	
+	public void setUtil(JSONUtil util) {
+		this.util = util; 
+	}
+
 }

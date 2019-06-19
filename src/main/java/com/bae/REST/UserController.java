@@ -9,13 +9,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import com.bae.business.UserService;
+import com.bae.business.UserServiceImpl;
 
 @Path("Users")
 public class UserController {
 
 	@Inject
-	private UserService service;
+	private UserServiceImpl service;
 	
 	@Path("getAllUsers")
 	@GET
@@ -34,7 +34,7 @@ public class UserController {
 	@Path("/createUser")
 	@POST
 	@Produces({"application/json"})
-	public String addUser(String user) {
+	public String createUser(String user) {
 		return service.createUser(user);
 	}
 	
@@ -50,6 +50,13 @@ public class UserController {
 	@Produces({"application/json"})
 	public String createDeck(@PathParam("id") int id, String deck) {
 		return service.createDeck(id, deck);
+	}
+	
+	@Path("/addEvent/{id}")
+	@POST
+	@Produces({"application/json"})
+	public String addEvent(@PathParam("id") int userId, int eventId) {
+		return service.addEvent(userId, eventId);
 	}
 	
 	@Path("/updateUser/{id}")
