@@ -1,5 +1,5 @@
 
-const LOCALHOSTURL = `http://localhost:8080/TopDeck/api`;
+const HOSTURL = `http://localhost:8080/TopDeck/api`;
 
 function makeRequest(method, url, body) {
 
@@ -27,7 +27,7 @@ function makeRequest(method, url, body) {
 
 const clickGetUserDecks = () => {
 
-    makeRequest("GET", LOCALHOSTURL + `/Users/getUser/${sessionStorage.getItem("userId")}`)
+    makeRequest("GET", HOSTURL + `/Users/getUser/${sessionStorage.getItem("userId")}`)
         .then((resolve) => { getUserDecks(resolve) })
         .catch(function (error) {
             console.log(error.message);
@@ -44,7 +44,6 @@ function getUserDecks(input) {
     for (let x = 0; x < user.decks.length; x++) {
 
         let newDeck = document.createElement('p');
-        newDeck.class = "deckCollapsible";
         newDeck.innerText = user.decks[x].name;
         newDeck.style = "background-color: Black;color: white;padding: 18px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px;active;collapsible:hover {background-color: #555;}"
         document.getElementById("decks").appendChild(newDeck);
@@ -54,16 +53,25 @@ function getUserDecks(input) {
         newDeckDiv.id = user.decks[x].deckId + "Div";
         document.getElementById("decks").appendChild(newDeckDiv);
 
-        let newDeckDetails = document.createElement('p');
+        let newDeckDetails = document.createElement('div');
+        
         let cards = user.decks[x].cards;
-        newDeckDetails.innerText = cards;
+        let formatedCards = cards.split(",").join("\n");
+        newDeckDetails.innerText = formatedCards;
+
+        newDeckDetails.class = "columns";
+        newDeckDetails.style = "column-count: 4;";
         newDeckDetails.id = user.decks[x].deckId + "Details";
         document.getElementById(user.decks[x].deckId + "Div").appendChild(newDeckDetails);
+
+        document.getElementById(user.decks[x].deckId + "Div").appendChild(document.createElement('br'));
+        document.getElementById(user.decks[x].deckId + "Div").appendChild(document.createElement('br'));
+
 
         let newDeckDelete = document.createElement('p');
         newDeckDelete.innerText = "Delete";
         newDeckDelete.id = user.decks[x].deckId + "delete";
-        newDeckDelete.style = "background-color: #777;color: white;padding: 5px;width: 25%;border: none;text-align: left;outline: none;font-size: 15px;";
+        newDeckDelete.style = "cursor: pointer;background-color: #777;color: white;padding: 5px;width: 25%;border: none;text-align: left;outline: none;font-size: 15px;";
         newDeckDelete.onclick = clickDeleteDeck;
         document.getElementById(user.decks[x].deckId + "Details").appendChild(newDeckDelete);
 
@@ -71,7 +79,7 @@ function getUserDecks(input) {
         let newDeckUpdate = document.createElement('p');
         newDeckUpdate.innerText = "Update";
         newDeckUpdate.id = user.decks[x].deckId + "update";
-        newDeckUpdate.style = "background-color: #777;color: white;padding: 5px;width: 25%;border: none;text-align: left;outline: none;font-size: 15px;";
+        newDeckUpdate.style = "cursor: pointer; background-color: #777;color: white;padding: 5px;width: 25%;border: none;text-align: left;outline: none;font-size: 15px;";
         newDeckUpdate.onclick = updateDeck;
         document.getElementById(user.decks[x].deckId + "Details").appendChild(newDeckUpdate);
 
@@ -83,7 +91,7 @@ const clickDeleteDeck = (e) => {
 
     let deckId = e.target.getAttribute('id').substring(0, 1);
 
-    makeRequest("DELETE", LOCALHOSTURL + `/Decks/deleteDeck/${deckId}`)
+    makeRequest("DELETE", HOSTURL + `/Decks/deleteDeck/${deckId}`)
         .then((resolve) => { location.href = 'user_decks.html' })
         .catch(function (error) { console.log(error.message) })
 
@@ -95,15 +103,69 @@ const updateDeck = (e) => {
 
     sessionStorage.setItem("deckId", deckId);
 
-    makeRequest("GET", LOCALHOSTURL + `/Decks/getDeck/${sessionStorage.getItem('deckId')}`)
-        .then((resolve) => { sessionStorage.setItem('deck', input) })
+    makeRequest("GET", HOSTURL + `/Decks/getDeck/${sessionStorage.getItem("deckId")}`)
+        .then((resolve) => { sessionStorage.setItem('deck', resolve) })
         .catch(function (error) { console.log(error.message) })
 
     location.href = 'update_deck.html';
 
 }
 
-function fillDeckFields(){
+const saveDeckChanges = () =>{
+
+    let deck = sessionStorage.getItem("deck");
+
+    let deckObj = JSON.parse(deck);
+
+    let name = document.getElementById("deckName").value;
+
+    deckObj.name = name;
+
+    let format = document.getElementById("deckFormat").value;
+
+    deckObj.format = format;
+
+    let rawCards = document.getElementById("deckCards").value;
+
+    joinedCards = rawCards.split("\n").join(",");
+
+    deckObj.cards = joinedCards;
+
+    let updatedDeck = JSON.stringify(deckObj);
+
+    makeRequest("PUT", HOSTURL + `/Decks/updateDeck/${sessionStorage.getItem("deckId")}`, updatedDeck)
+        .then((resolve) => { location.href = 'user_decks.html' })
+        .catch(function (error) { console.log(error.message) })
+
+}
+
+const createNewDeck = () =>{
+
+    let newDeckObj = {};
+
+    let name = document.getElementById("deckName").value;
+
+    newDeckObj.name = name;
+
+    let format = document.getElementById("deckFormat").value;
+
+    newDeckObj.format = format;
+
+    let rawCards = document.getElementById("deckCards").value;
+
+    joinedCards = rawCards.split("\n").join(",");
+
+    newDeckObj.cards = joinedCards;
+
+    let newDeckJSON = JSON.stringify(newDeckObj);
+
+    makeRequest("POST", HOSTURL + `/Users/createDeck/${sessionStorage.getItem("userId")}`, newDeckJSON)
+        .then((resolve) => { location.href = 'user_decks.html' })
+        .catch(function (error) { console.log(error.message) })
+
+}
+
+function fillDeckFields() {
     let deck = sessionStorage.getItem("deck");
 
     let deckObj = JSON.parse(deck);
@@ -119,7 +181,7 @@ function fillDeckFields(){
 
 
 const clickGetallUsers = () => {
-    makeRequest("GET", LOCALHOSTURL + `/Users/getAllUsers`)
+    makeRequest("GET", HOSTURL + `/Users/getAllUsers`)
         .then((resolve) => { getAllUsers(resolve) })
         .catch(function (error) { console.log(error.message) })
 
@@ -168,7 +230,7 @@ function getAllUsers(input) {
 
 
 function clickGetDeck() {
-    makeRequest("GET", LOCALHOSTURL + `/Decks/getDeck/${sessionStorage.getItem('deckId')}`)
+    makeRequest("GET", HOSTURL + `/Decks/getDeck/${sessionStorage.getItem('deckId')}`)
         .then((resolve) => { parseStoreDeck(resolve) })
         .catch(function (error) { console.log(error.message) })
     return false;
@@ -176,7 +238,7 @@ function clickGetDeck() {
 
 
 const clickSignIn = () => {
-    makeRequest("GET", LOCALHOSTURL + `/Users/getUser/${document.getElementById("loginId").value}`)
+    makeRequest("GET", HOSTURL + `/Users/getUser/${document.getElementById("loginId").value}`)
         .then((resolve) => { signIn(resolve) })
         .catch(function (error) {
             console.log(error.message)
