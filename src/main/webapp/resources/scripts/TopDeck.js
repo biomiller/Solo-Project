@@ -96,15 +96,11 @@ const updateDeck = (e) => {
     sessionStorage.setItem("deckId", deckId);
 
     makeRequest("GET", LOCALHOSTURL + `/Decks/getDeck/${sessionStorage.getItem('deckId')}`)
-        .then((resolve) => { parseStoreDeck(resolve) })
+        .then((resolve) => { sessionStorage.setItem('deck', input) })
         .catch(function (error) { console.log(error.message) })
 
     location.href = 'update_deck.html';
 
-}
-
-function parseStoreDeck(input) {
-    sessionStorage.setItem('deck', input);
 }
 
 function fillDeckFields(){
