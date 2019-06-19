@@ -12,9 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
-import com.bae.persistence.domain.Deck;
 import com.bae.persistence.domain.Event;
-import com.bae.persistence.domain.User;
 import com.bae.util.JSONUtil;
 
 @Transactional(SUPPORTS)

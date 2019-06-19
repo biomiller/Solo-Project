@@ -188,7 +188,7 @@ public class UserDBRepositoryTest {
 		assertEquals(reply, "{\"message\": \"Deck successfully added.\"}");
 	}
 	
-/*	@Test
+	@Test
 	public void addEventTest() {
 		Set<Deck> decks = new HashSet<Deck>();
 		Deck deck = new Deck();
@@ -204,9 +204,11 @@ public class UserDBRepositoryTest {
 
 
 		Mockito.when(manager.find(User.class, 1)).thenReturn(user);
+		Mockito.when(manager.find(Event.class, 1)).thenReturn(newEvent);
 
-		String reply = repo.addEvent(1, util.getJSONForObject(newEvent));
+
+		String reply = repo.addEvent(1, 1);
 		assertEquals(reply, "{\"message\": \"Event successfully added to user.\"}");
-	}*/
+	}
 
 }

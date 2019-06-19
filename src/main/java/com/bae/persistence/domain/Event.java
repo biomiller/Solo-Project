@@ -1,8 +1,5 @@
 package com.bae.persistence.domain;
 
-import java.util.Date;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +11,6 @@ public class Event {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int eventId;
-	@Column(unique = true)
 	private String name;
 	private String format;
 	private String location;

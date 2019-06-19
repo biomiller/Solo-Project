@@ -12,7 +12,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.bae.persistence.repository.UserDBRepository;
 import com.bae.util.Constants;
-import com.bae.util.JSONUtil;
 
 @RunWith(MockitoJUnitRunner.class)
 
