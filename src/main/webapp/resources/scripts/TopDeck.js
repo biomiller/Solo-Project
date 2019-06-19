@@ -39,7 +39,7 @@ const clickGetUserDecks = () => {
 
 function getUserDecks(input) {
 
-    user = JSON.parse(input);
+    let user = JSON.parse(input);
 
     for (let x = 0; x < user.decks.length; x++) {
 
@@ -127,7 +127,7 @@ const saveDeckChanges = () =>{
 
     let rawCards = document.getElementById("deckCards").value;
 
-    joinedCards = rawCards.split("\n").join(",");
+    let joinedCards = rawCards.split("\n").join(",");
 
     deckObj.cards = joinedCards;
 
@@ -153,7 +153,7 @@ const createNewDeck = () =>{
 
     let rawCards = document.getElementById("deckCards").value;
 
-    joinedCards = rawCards.split("\n").join(",");
+    let joinedCards = rawCards.split("\n").join(",");
 
     newDeckObj.cards = joinedCards;
 
@@ -190,7 +190,7 @@ const clickGetallUsers = () => {
 
 function getAllUsers(input) {
 
-    allUsers = JSON.parse(input);
+    let allUsers = JSON.parse(input);
 
     while (document.getElementById("usersTable").rows.length > 1) {
         document.getElementById("usersTable").deleteRow(1);
@@ -250,7 +250,7 @@ const clickSignIn = () => {
 
 function signIn(input) {
 
-    user = JSON.parse(input);
+    let user = JSON.parse(input);
     sessionStorage.setItem("userId", user.userId)
     location.href = 'home_signed_in.html';
 

@@ -21,10 +21,6 @@ public class Deck {
 	private String format;
 	@Column(length = 10000)
 	private String cards;
-/*	@ManyToOne (cascade = CascadeType.ALL)
-	private User user;*/
-/*  @OneToMany(cascade=CascadeType.ALL, mappedBy="deck") 
-	private Set<DeckCard> cards = new HashSet<DeckCard>();*/
 
 
 	// default constructor
@@ -82,23 +78,5 @@ public class Deck {
 		this.cards = cards;
 	}
 	
-
-
-
-
-
-
-/*	public User getUser() {
-		return user;
-	}
-
-
-	public void setUser(User user) {
-		this.user = user;
-	}*/
-
-
-
-
 
 }

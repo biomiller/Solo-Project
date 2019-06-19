@@ -56,13 +56,13 @@ public class EventServiceImplTest {
 	@Test
 	public void createEventTest() {
 		Mockito.when(repo.createEvent(Constants.MOCK_EVENT_OBJECT)).thenReturn("{\"message\": \"Event successfully created.\"}");
-		assertEquals(service.createEvent(Constants.MOCK_EVENT_OBJECT), "{\"message\": \"Event successfully created.\"}");
+		assertEquals("{\"message\": \"Event successfully created.\"}", service.createEvent(Constants.MOCK_EVENT_OBJECT));
 	}
 	
 	@Test
 	public void deleteEventTest() {
 		Mockito.when(repo.deleteEvent(0)).thenReturn("{\"message\": \"Event deleted.\"}");
-		assertEquals(service.deleteEvent(0), "{\"message\": \"Event deleted.\"}");
+		assertEquals("{\"message\": \"Event deleted.\"}", service.deleteEvent(0));
 	}
 	
 	@Test
@@ -70,7 +70,7 @@ public class EventServiceImplTest {
 						
 		Mockito.when(repo.updateEvent(0, Constants.MOCK_EVENT_OBJECT)).thenReturn("{\"message\": \"Event updated.\"}");
 	
-		assertEquals(service.updateEvent(0, Constants.MOCK_EVENT_OBJECT), "{\"message\": \"Event updated.\"}");
+		assertEquals("{\"message\": \"Event updated.\"}", service.updateEvent(0, Constants.MOCK_EVENT_OBJECT));
 	}
 	
 

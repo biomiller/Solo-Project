@@ -57,7 +57,7 @@ public class DeckServiceImplTest {
 	@Test
 	public void testDeleteDeck() {
 		Mockito.when(repo.deleteDeck(0)).thenReturn("{\"message\": \"Deck deleted.\"}");
-		assertEquals(service.deleteDeck(0), "{\"message\": \"Deck deleted.\"}");
+		assertEquals("{\"message\": \"Deck deleted.\"}", service.deleteDeck(0));
 	}
 	
 	@Test
@@ -65,7 +65,7 @@ public class DeckServiceImplTest {
 				
 		Mockito.when(repo.updateDeck(0, Constants.MOCK_DECK_OBJECT)).thenReturn("{\"message\": \"Deck updated.\"}");
 
-		assertEquals(service.updateDeck(0,Constants.MOCK_DECK_OBJECT), "{\"message\": \"Deck updated.\"}");
+		assertEquals("{\"message\": \"Deck updated.\"}", service.updateDeck(0,Constants.MOCK_DECK_OBJECT));
 		
 	}
 }
