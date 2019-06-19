@@ -30,37 +30,27 @@ public class DeckServiceImplTest {
 	@Mock
 	private DeckDBRepository repo;
 
-	private JSONUtil util;
 
 	@Before
 	public void setup() {
-		util = new JSONUtil();
-		repo.setUtil(util);
+
 	}
 
 	@Test
 	public void testGetAllDecks() {
 
-		ArrayList<Deck> decks = new ArrayList<Deck>();
-		Deck deck = new Deck("testDeck1", "M19", "4 Lightning Bolt, 4 Lava Spike, 52 Mountains");
-		decks.add(deck);
 
-		String retrievedDecks = util.getJSONForObject(decks);
-
-		Mockito.when(repo.getAllDecks()).thenReturn(retrievedDecks);
-		assertEquals(Constants.MOCK_DECK_DATA_ARRAY, repo.getAllDecks());
+		Mockito.when(repo.getAllDecks()).thenReturn(Constants.MOCK_DECK_DATA_ARRAY);
+		assertEquals(Constants.MOCK_DECK_DATA_ARRAY, service.getAllDecks());
 
 	}
 
 	@Test
 	public void testGetDeck() {
 
-		Deck deck = new Deck("testDeck1", "M19", "4 Lightning Bolt, 4 Lava Spike, 52 Mountains");
 
-		String retrievedDeck = util.getJSONForObject(deck);
-
-		Mockito.when(repo.getDeck(0)).thenReturn(retrievedDeck);
-		assertEquals(Constants.MOCK_DECK_OBJECT, repo.getDeck(0));
+		Mockito.when(repo.getDeck(0)).thenReturn(Constants.MOCK_DECK_OBJECT);
+		assertEquals(Constants.MOCK_DECK_OBJECT, service.getDeck(0));
 
 	}
 	
@@ -72,12 +62,10 @@ public class DeckServiceImplTest {
 	
 	@Test
 	public void testUpdateDeck() {
-		
-		Deck compDeck = new Deck("testDeck1", "M19", "4 Lightning Bolt, 4 Lava Spike, 52 Mountains");
-		
-		Mockito.when(repo.updateDeck(0, util.getJSONForObject(compDeck))).thenReturn("{\"message\": \"Deck updated.\"}");
+				
+		Mockito.when(repo.updateDeck(0, Constants.MOCK_DECK_OBJECT)).thenReturn("{\"message\": \"Deck updated.\"}");
 
-		assertEquals(service.updateDeck(0,util.getJSONForObject(compDeck)), "{\"message\": \"Deck updated.\"}");
+		assertEquals(service.updateDeck(0,Constants.MOCK_DECK_OBJECT), "{\"message\": \"Deck updated.\"}");
 		
 	}
 }

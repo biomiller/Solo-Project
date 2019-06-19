@@ -28,27 +28,16 @@ public class EventServiceImplTest {
 	@Mock
 	private EventDBRepository repo;
 	
-	private JSONUtil util;
-	
-
 
 	@Before
 	public void setup() {
-		util = new JSONUtil();
-		repo.setUtil(util);
 	}
 	
 	@Test
 	public void getAllEventsTest() {
 		
-		ArrayList<Event> events = new ArrayList<Event>();
-		Event event = new Event("M19 Prerelease", "limited", "Rogue Gaming", "2018-07-09");
-
-		events.add(event);
 		
-		String retrievedEvents = util.getJSONForObject(events);
-		
-		Mockito.when(repo.getAllEvents()).thenReturn(retrievedEvents);
+		Mockito.when(repo.getAllEvents()).thenReturn(Constants.MOCK_EVENT_DATA_ARRAY);
 		
 		assertEquals(Constants.MOCK_EVENT_DATA_ARRAY, service.getAllEvents());
 
@@ -57,11 +46,8 @@ public class EventServiceImplTest {
 	@Test
 	public void getEventTest() {
 		
-		Event event = new Event("M19 Prerelease", "limited", "Rogue Gaming", "2018-07-09");
 		
-		String retrievedEvent = util.getJSONForObject(event);
-		
-		Mockito.when(repo.getEvent(0)).thenReturn(retrievedEvent);
+		Mockito.when(repo.getEvent(0)).thenReturn(Constants.MOCK_EVENT_OBJECT);
 		
 		assertEquals(Constants.MOCK_EVENT_OBJECT, service.getEvent(0));
 
@@ -81,11 +67,10 @@ public class EventServiceImplTest {
 	
 	@Test
 	public void updateEventTest() {
-		Event compEvent = new Event("M19 Prerelease", "limited", "Rogue Gaming", "2018-07-09");
-				
-		Mockito.when(repo.updateEvent(0, util.getJSONForObject(compEvent))).thenReturn("{\"message\": \"Event updated.\"}");
+						
+		Mockito.when(repo.updateEvent(0, Constants.MOCK_EVENT_OBJECT)).thenReturn("{\"message\": \"Event updated.\"}");
 	
-		assertEquals(service.updateEvent(0, util.getJSONForObject(compEvent)), "{\"message\": \"Event updated.\"}");
+		assertEquals(service.updateEvent(0, Constants.MOCK_EVENT_OBJECT), "{\"message\": \"Event updated.\"}");
 	}
 	
 

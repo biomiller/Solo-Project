@@ -8,13 +8,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import com.bae.business.DeckService;
+import com.bae.business.DeckServiceImpl;
 
 @Path("Decks")
 public class DeckController {
 	
 	@Inject
-	private DeckService service;
+	private DeckServiceImpl service;
 	
 	@Path("getAllDecks")
 	@GET
