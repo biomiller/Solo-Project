@@ -5,3 +5,10 @@
 #Title{
     color: White;
 }
+
+
+#deckCards{
+    height:1000px;
+    font-size:14pt;
+    width: 400px;
+}

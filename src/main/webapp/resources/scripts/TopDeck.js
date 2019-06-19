@@ -70,28 +70,56 @@ function getUserDecks(input) {
 
         let newDeckUpdate = document.createElement('p');
         newDeckUpdate.innerText = "Update";
+        newDeckUpdate.id = user.decks[x].deckId + "update";
         newDeckUpdate.style = "background-color: #777;color: white;padding: 5px;width: 25%;border: none;text-align: left;outline: none;font-size: 15px;";
+        newDeckUpdate.onclick = updateDeck;
         document.getElementById(user.decks[x].deckId + "Details").appendChild(newDeckUpdate);
 
 
     }
-
-
-
 }
 
 const clickDeleteDeck = (e) => {
 
-    let deckId = e.target.getAttribute('id').substring(0,1);
+    let deckId = e.target.getAttribute('id').substring(0, 1);
 
     makeRequest("DELETE", LOCALHOSTURL + `/Decks/deleteDeck/${deckId}`)
-        .then((resolve) => {location.href = 'userDecks.html'})
+        .then((resolve) => { location.href = 'user_decks.html' })
         .catch(function (error) { console.log(error.message) })
 
     return false;
 }
 
+const updateDeck = (e) => {
+    let deckId = e.target.getAttribute('id').substring(0, 1);
 
+    sessionStorage.setItem("deckId", deckId);
+
+    makeRequest("GET", LOCALHOSTURL + `/Decks/getDeck/${sessionStorage.getItem('deckId')}`)
+        .then((resolve) => { parseStoreDeck(resolve) })
+        .catch(function (error) { console.log(error.message) })
+
+    location.href = 'update_deck.html';
+
+}
+
+function parseStoreDeck(input) {
+    sessionStorage.setItem('deck', input);
+}
+
+function fillDeckFields(){
+    let deck = sessionStorage.getItem("deck");
+
+    let deckObj = JSON.parse(deck);
+
+    document.getElementById("deckName").value = deckObj.name;
+    document.getElementById("deckFormat").value = deckObj.format;
+
+    let formattedCards = deckObj.cards.split(",").join("\n");
+
+    document.getElementById("deckCards").value = formattedCards;
+
+}
 
 
 const clickGetallUsers = () => {
@@ -142,25 +170,14 @@ function getAllUsers(input) {
 
 }
 
-const deckDetails = (e) => {
-    sessionStorage.setItem("deckId", e.target.getAttribute('id'));
-    location.href = 'deck_details.html';
-};
 
 function clickGetDeck() {
     makeRequest("GET", LOCALHOSTURL + `/Decks/getDeck/${sessionStorage.getItem('deckId')}`)
-        .then((resolve) => { getDeck(resolve) })
+        .then((resolve) => { parseStoreDeck(resolve) })
         .catch(function (error) { console.log(error.message) })
     return false;
 }
 
-function getDeck(input) {
-
-    deck = JSON.parse(input);
-
-    document.getElementById("deckList").innerText = deck.cards;
-
-}
 
 const clickSignIn = () => {
     makeRequest("GET", LOCALHOSTURL + `/Users/getUser/${document.getElementById("loginId").value}`)
@@ -181,7 +198,7 @@ function signIn(input) {
 
 }
 
-function signOut(input) {
+function signOut() {
     sessionStorage.removeItem("userId")
     location.href = 'home.html';
 
