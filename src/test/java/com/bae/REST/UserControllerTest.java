@@ -84,9 +84,9 @@ public class UserControllerTest {
 	@Test
 	public void testAddEvent() {
 						
-		Mockito.when(service.addEvent(0, Constants.MOCK_EVENT_OBJECT)).thenReturn("{\"message\": \"Event successfully added to user.\"}");
+		Mockito.when(service.addEvent(0, 1)).thenReturn("{\"message\": \"Event successfully added to user.\"}");
 
-		assertEquals(controller.addEvent(0, Constants.MOCK_EVENT_OBJECT), "{\"message\": \"Event successfully added to user.\"}");
+		assertEquals(controller.addEvent(0, 1), "{\"message\": \"Event successfully added to user.\"}");
 		
 		
 	}

@@ -85,9 +85,9 @@ public class UserServiceImplTest {
 	@Test
 	public void testAddEvent() {
 						
-		Mockito.when(repo.addEvent(0, Constants.MOCK_EVENT_OBJECT)).thenReturn("{\"message\": \"Event successfully added to user.\"}");
+		Mockito.when(repo.addEvent(0, 1)).thenReturn("{\"message\": \"Event successfully added to user.\"}");
 
-		assertEquals(service.addEvent(0, Constants.MOCK_EVENT_OBJECT), "{\"message\": \"Event successfully added to user.\"}");
+		assertEquals(service.addEvent(0, 1), "{\"message\": \"Event successfully added to user.\"}");
 		
 		
 	}

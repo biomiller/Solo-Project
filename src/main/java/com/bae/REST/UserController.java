@@ -55,8 +55,8 @@ public class UserController {
 	@Path("/addEvent/{id}")
 	@POST
 	@Produces({"application/json"})
-	public String addEvent(@PathParam("id") int id, String event) {
-		return service.addEvent(id, event);
+	public String addEvent(@PathParam("id") int userId, int eventId) {
+		return service.addEvent(userId, eventId);
 	}
 	
 	@Path("/updateUser/{id}")

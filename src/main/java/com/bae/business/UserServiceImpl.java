@@ -39,8 +39,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public String addEvent(int id, String event) {
-		return userRepo.addEvent(id, event);
+	public String addEvent(int userId, int eventId) {
+		return userRepo.addEvent(userId, eventId);
 	}
 
 }

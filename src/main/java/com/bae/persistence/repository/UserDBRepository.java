@@ -98,10 +98,10 @@ public class UserDBRepository implements UserRepository {
 	
 	@Override
 	@Transactional(REQUIRED)
-	public String addEvent(int id, String event) {
-		Event newEvent = util.getObjectForJSON(event, Event.class); 
-		User user = manager.find(User.class, id);
-		user.getEvents().add(newEvent);
+	public String addEvent(int userId, int eventId) {
+		Event event = manager.find(Event.class, eventId);
+		User user = manager.find(User.class, userId);
+		user.getEvents().add(event);
 		manager.persist(user);
 		return "{\"message\": \"Event successfully added to user.\"}";
 	} 

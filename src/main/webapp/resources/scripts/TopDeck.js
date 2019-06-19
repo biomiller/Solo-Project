@@ -1,3 +1,6 @@
+
+const LOCALHOSTURL = `http://localhost:8080/TopDeck/api`;
+
 function makeRequest(method, url, body) {
 
     return new Promise(
@@ -24,7 +27,7 @@ function makeRequest(method, url, body) {
 
 
 const clickGetUser = () => {
-    makeRequest("GET", `http://localhost:8080/TopDeck/api/Users/getUser/${document.getElementById("getUserId").value}`)
+    makeRequest("GET", LOCALHOSTURL + `/Users/getUser/${document.getElementById("getUserId").value}`)
         .then((resolve) => { getUser(resolve) })
         .catch(function (error) { 
             console.log(error.message) 
@@ -73,7 +76,7 @@ function getUser(input) {
 
 
 const clickGetallUsers = () => {
-    makeRequest("GET", `http://localhost:8080/TopDeck/api/Users/getAllUsers`)
+    makeRequest("GET", LOCALHOSTURL + `/Users/getAllUsers`)
         .then((resolve) => { getAllUsers(resolve) })
         .catch(function (error) { console.log(error.message) })
 
@@ -130,7 +133,7 @@ const deckDetails = (e) => {
 };
 
 function clickGetDeck(){
-    makeRequest("GET", `http://localhost:8080/TopDeck/api/Decks/getDeck/${sessionStorage.getItem('deckId')}`)
+    makeRequest("GET", LOCALHOSTURL + `/Decks/getDeck/${sessionStorage.getItem('deckId')}`)
     .then((resolve) => {getDeck(resolve)})
     .catch(function (error) { console.log(error.message) })
 return false;
