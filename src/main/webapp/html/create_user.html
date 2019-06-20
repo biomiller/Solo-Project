@@ -30,7 +30,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="sign_in.html">Sign Up</a>
+                <a class="nav-link" href="create_user.html">Sign Up</a>
             </li>
 
         </ul>
@@ -38,19 +38,21 @@
 
     <h1>New User</h1>
 
+    <form>
         <p>Name:
             <input id="userName" type="text" required>
         </p>
 
-        <p>Format:
+        <p>Email:
             <input id="userEmail" type="text" required>
         </p>
 
-        <p>Cards:
+        <p>Password:
             <input id="userPassword" type="text" required>
         </p>
 
         <button onclick="return createNewUser()">Create User</button>
+    </form>
 
     <script src="../resources/scripts/TopDeck.js"></script>
 

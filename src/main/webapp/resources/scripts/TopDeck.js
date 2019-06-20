@@ -1,6 +1,6 @@
 
-// const HOSTURL = `http://localhost:8080/TopDeck/api`;
-const HOSTURL = `http://35.189.85.82:8888/TopDeck/api`;
+const HOSTURL = `http://localhost:8080/TopDeck/api`;
+//const HOSTURL = `http://35.189.85.82:8888/TopDeck/api`;
 
 function makeRequest(method, url, body) {
 
@@ -184,7 +184,7 @@ function createNewUser () {
 
     let newUserJSON = JSON.stringify(newUserObj);
 
-    makeRequest("POST", HOSTURL + `/Users/createUser`, newDeckJSON)
+    makeRequest("POST", HOSTURL + `/Users/createUser`, newUserJSON)
         .then((resolve) => { location.href = 'home.html' })
         .catch(function (error) { console.log(error.message) })
 
@@ -265,11 +265,11 @@ function clickGetDeck() {
 
 
 const clickSignIn = () => {
-    makeRequest("GET", HOSTURL + `/Users/getUser/${document.getElementById("loginId").value}`)
+    makeRequest("GET", HOSTURL + `/Users/getUserByEmail/${document.getElementById("loginEmail").value}`)
         .then((resolve) => { signIn(resolve) })
         .catch(function (error) {
             console.log(error.message)
-            document.getElementById("loginId").value = "ID not found!";
+            document.getElementById("loginEmail").value = "User not found!";
         })
 
     return false;
