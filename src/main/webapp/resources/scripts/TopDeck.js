@@ -138,6 +138,7 @@ const saveDeckChanges = () =>{
         .then((resolve) => { location.href = 'user_decks.html' })
         .catch(function (error) { console.log(error.message) })
 
+    clickSignIn
 }
 
 function createNewDeck () {
@@ -176,6 +177,8 @@ function createNewUser () {
 
     let email = document.getElementById("userEmail").value;
 
+    sessionStorage.setItem("loginEmail", email);
+
     newUserObj.email = email;
 
     let password = document.getElementById("userPassword").value;
@@ -187,6 +190,8 @@ function createNewUser () {
     makeRequest("POST", HOSTURL + `/Users/createUser`, newUserJSON)
         .then((resolve) => { location.href = 'home.html' })
         .catch(function (error) { console.log(error.message) })
+
+    
 
 }
 
@@ -265,10 +270,10 @@ function clickGetDeck() {
 
 
 const clickSignIn = () => {
+
     makeRequest("GET", HOSTURL + `/Users/getUserByEmail/${document.getElementById("loginEmail").value}`)
         .then((resolve) => { signIn(resolve) })
         .catch(function (error) {
-            console.log(error.message)
             document.getElementById("loginEmail").value = "User not found!";
         })
 
