@@ -128,7 +128,7 @@ const updateDeck = () => {
 
     let rawCards = document.getElementById("deckCards").value;
 
-    let joinedCards = rawCards.split("\n").join(",");
+    let joinedCards = rawCards.replace(/\s\s+/g, '\n').split("\n").join(",");
 
     deckObj.cards = joinedCards;
 
@@ -154,7 +154,7 @@ function createNewDeck() {
 
     let rawCards = document.getElementById("deckCards").value;
 
-    let joinedCards = rawCards.split("\n").join(",");
+    let joinedCards = rawCards.replace(/\s\s+/g, '\n').split("\n").join(",");
 
     newDeckObj.cards = joinedCards;
 
@@ -235,6 +235,12 @@ function updateUser() {
         })
 
     return false;
+}
+
+function deleteUser() {
+    makeRequest("DELETE", HOSTURL + `/Users/deleteUser/${sessionStorage.getItem("userId")}`)
+        .then((resolve) => { location.href = 'home.html' })
+        .catch(function (error) { console.log(error.message) })
 }
 
 
