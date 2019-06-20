@@ -88,6 +88,8 @@ function getUserDecks(input) {
     }
 }
 
+
+
 const clickDeleteDeck = (e) => {
 
     let deckId = e.target.getAttribute('id').substring(0, 1);
@@ -353,3 +355,52 @@ function signOut() {
 
 }
 
+
+const clickGetAllDecks = () => {
+
+    makeRequest("GET", HOSTURL + `/Decks/getAllDecks`)
+        .then((resolve) => { getAllDecks(resolve) })
+        .catch(function (error) {
+            console.log(error.message);
+
+        })
+
+    return false;
+}
+
+function getAllDecks(input) {
+
+    console.log(input);
+
+    let allDecks = JSON.parse(input);
+
+    console.log(allDecks[0]);
+
+        for (let x = 0; x < allDecks.length; x++) {
+
+            let newDeck = document.createElement('p');
+            newDeck.innerText = allDecks[x].name;
+            newDeck.style = "background-color: Black;color: white;padding: 18px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px;active;collapsible:hover {background-color: #555;}"
+            document.getElementById("decks").appendChild(newDeck);
+
+            let newDeckDiv = document.createElement('div');
+            newDeckDiv.class = "content";
+            newDeckDiv.id = allDecks[x].deckId + "Div";
+            document.getElementById("decks").appendChild(newDeckDiv);
+
+            let newDeckDetails = document.createElement('div');
+
+            let cards = allDecks[x].cards;
+            let formatedCards = cards.split(",").join("\n");
+            newDeckDetails.innerText = formatedCards;
+
+            newDeckDetails.class = "columns";
+            newDeckDetails.style = "column-count: 4;";
+            newDeckDetails.id = allDecks[x].deckId + "Details";
+            document.getElementById(allDecks[x].deckId + "Div").appendChild(newDeckDetails);
+
+            document.getElementById(allDecks[x].deckId + "Div").appendChild(document.createElement('br'));
+            document.getElementById(allDecks[x].deckId + "Div").appendChild(document.createElement('br'));
+        
+    }
+}
