@@ -55,7 +55,7 @@ function getUserDecks(input) {
         document.getElementById("decks").appendChild(newDeckDiv);
 
         let newDeckDetails = document.createElement('div');
-        
+
         let cards = user.decks[x].cards;
         let formatedCards = cards.split(",").join("\n");
         newDeckDetails.innerText = formatedCards;
@@ -81,7 +81,7 @@ function getUserDecks(input) {
         newDeckUpdate.innerText = "Update";
         newDeckUpdate.id = user.decks[x].deckId + "update";
         newDeckUpdate.style = "cursor: pointer; background-color: #777;color: white;padding: 5px;width: 25%;border: none;text-align: left;outline: none;font-size: 15px;";
-        newDeckUpdate.onclick = updateDeck;
+        newDeckUpdate.onclick = clickUpdateDeck;
         document.getElementById(user.decks[x].deckId + "Details").appendChild(newDeckUpdate);
 
 
@@ -99,7 +99,7 @@ const clickDeleteDeck = (e) => {
     return false;
 }
 
-const updateDeck = (e) => {
+const clickUpdateDeck = (e) => {
     let deckId = e.target.getAttribute('id').substring(0, 1);
 
     sessionStorage.setItem("deckId", deckId);
@@ -112,7 +112,7 @@ const updateDeck = (e) => {
 
 }
 
-const saveDeckChanges = () =>{
+const updateDeck = () => {
 
     let deck = sessionStorage.getItem("deck");
 
@@ -138,10 +138,9 @@ const saveDeckChanges = () =>{
         .then((resolve) => { location.href = 'user_decks.html' })
         .catch(function (error) { console.log(error.message) })
 
-    clickSignIn
 }
 
-function createNewDeck () {
+function createNewDeck() {
 
     let newDeckObj = {};
 
@@ -167,7 +166,7 @@ function createNewDeck () {
 
 }
 
-function createNewUser () {
+function createNewUser() {
 
     let newUserObj = {};
 
@@ -188,11 +187,54 @@ function createNewUser () {
     let newUserJSON = JSON.stringify(newUserObj);
 
     makeRequest("POST", HOSTURL + `/Users/createUser`, newUserJSON)
-        .then((resolve) => { location.href = 'home.html' })
-        .catch(function (error) { console.log(error.message) })
+        .then((resolve) => {
+            makeRequest("GET", HOSTURL + `/Users/getUserByEmail/${sessionStorage.getItem("loginEmail")}`)
+                .then((resolve) => { signIn(resolve) })
+        })
+        .catch(function (error) {
+            console.log(error.message);
+            document.getElementById("userEmail").placeholder = "Email taken";
+            document.getElementById("userEmail").value = "";
+        })
 
-    
+    return false;
+}
 
+function updateUser() {
+
+    let newUserObj = {};
+
+    let name = document.getElementById("userName").value;
+
+    newUserObj.name = name;
+
+    let email = document.getElementById("userEmail").value;
+
+    sessionStorage.setItem("loginEmail", email);
+
+    newUserObj.email = email;
+
+    let password = document.getElementById("userPassword").value;
+
+    newUserObj.password = password;
+
+    let newUserJSON = JSON.stringify(newUserObj);
+
+    makeRequest("PUT", HOSTURL + `/Users/updateUser/${sessionStorage.getItem("userId")}`, newUserJSON)
+        .then((resolve) => {
+            makeRequest("GET", HOSTURL + `/Users/getUser/${sessionStorage.getItem("userId")}`)
+                .then((resolve) => {
+                    sessionStorage.setItem("user", resolve);
+                    location.href = "home_signed_in.html";
+                })
+        })
+        .catch(function (error) {
+            console.log(error);
+            document.getElementById("userEmail").placeholder = "Email taken";
+            document.getElementById("userEmail").value = "";
+        })
+
+    return false;
 }
 
 
@@ -210,6 +252,17 @@ function fillDeckFields() {
     document.getElementById("deckCards").value = formattedCards;
 
 }
+
+function fillUserFields() {
+    let user = sessionStorage.getItem("user");
+    let userObj = JSON.parse(user);
+
+    document.getElementById("userName").value = userObj.name;
+    document.getElementById("userEmail").value = userObj.email;
+    document.getElementById("userPassword").value = userObj.password;
+}
+
+
 
 
 const clickGetallUsers = () => {
@@ -281,9 +334,9 @@ const clickSignIn = () => {
 }
 
 function signIn(input) {
-
+    sessionStorage.setItem("user", input);
     let user = JSON.parse(input);
-    sessionStorage.setItem("userId", user.userId)
+    sessionStorage.setItem("userId", user.userId);
     location.href = 'home_signed_in.html';
 
 }

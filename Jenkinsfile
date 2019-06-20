@@ -29,8 +29,6 @@ pipeline{
                 }
 		stage('--deploy--'){
                         steps{
-                                sh "cd /"
-				sh "pwd"
 				sh "sudo cp /var/lib/jenkins/workspace/Solo-Project/target/TopDeck.war /home/g92millero/wildfly-10.1.0.Final/standalone/deployments"
                         }
                 }
