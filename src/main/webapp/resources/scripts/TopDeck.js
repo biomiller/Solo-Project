@@ -1,5 +1,6 @@
 
 const HOSTURL = `http://localhost:8080/TopDeck/api`;
+// const HOSTURL = `http://35.189.85.82:8888/TopDeck/api`;
 
 function makeRequest(method, url, body) {
 
@@ -139,7 +140,7 @@ const saveDeckChanges = () =>{
 
 }
 
-const createNewDeck = () =>{
+function createNewDeck () {
 
     let newDeckObj = {};
 
@@ -164,6 +165,32 @@ const createNewDeck = () =>{
         .catch(function (error) { console.log(error.message) })
 
 }
+
+function createNewUser () {
+
+    let newUserObj = {};
+
+    let name = document.getElementById("userName").value;
+
+    newUserObj.name = name;
+
+    let email = document.getElementById("userEmail").value;
+
+    newUserObj.email = email;
+
+    let password = document.getElementById("userPassword").value;
+
+    newUserObj.password = password;
+
+    let newUserJSON = JSON.stringify(newUserObj);
+
+    makeRequest("POST", HOSTURL + `/Users/createUser`, newDeckJSON)
+        .then((resolve) => { location.href = 'home.html' })
+        .catch(function (error) { console.log(error.message) })
+
+}
+
+
 
 function fillDeckFields() {
     let deck = sessionStorage.getItem("deck");

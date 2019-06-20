@@ -50,6 +50,16 @@ public class UserServiceImplTest {
 	}
 	
 	@Test
+	public void testGetUserByEmail() {
+
+
+		Mockito.when(repo.getUserByEmail("dummyemail@gmail.com")).thenReturn(Constants.MOCK_USER_OBJECT);
+		
+		assertEquals(Constants.MOCK_USER_OBJECT, service.getUserByEmail("dummyemail@gmail.com"));
+
+	}
+	
+	@Test
 	public void testCreateUser() {
 		Mockito.when(repo.createUser(Constants.MOCK_USER_OBJECT)).thenReturn("{\"message\": \"User successfully added.\"}");
 		assertEquals("{\"message\": \"User successfully added.\"}", service.createUser(Constants.MOCK_USER_OBJECT));

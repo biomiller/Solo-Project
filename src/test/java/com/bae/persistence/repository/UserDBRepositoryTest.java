@@ -80,9 +80,33 @@ public class UserDBRepositoryTest {
 
 		User user = new User("Owen", "dummyemail@gmail.com", "password", decks, events);
 
+		
 		Mockito.when(manager.find(User.class, 0)).thenReturn(user);
 
 		assertEquals(Constants.MOCK_USER_OBJECT, repo.getUser(0));
+
+	}
+	
+	@Test
+	public void testGetUserByEmail() {
+
+		Set<Deck> decks = new HashSet<Deck>();
+		Deck deck = new Deck();
+		decks.add(deck);
+
+		Set<Event> events = new HashSet<Event>();
+		Event event = new Event();
+		events.add(event);
+
+		User user = new User("Owen", "dummyemail@gmail.com", "password", decks, events);
+		
+		String email = "dummyemail@gmail.com";
+		
+		Mockito.when(manager.createQuery(Mockito.anyString())).thenReturn(query);
+
+
+		Mockito.when(query.setParameter("email", email).getSingleResult());
+		assertEquals(Constants.MOCK_USER_OBJECT, repo.getUserByEmail(email));
 
 	}
 

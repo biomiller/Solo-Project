@@ -50,6 +50,16 @@ public class UserControllerTest {
 	}
 	
 	@Test
+	public void testGetUserByEmail() {
+
+
+		Mockito.when(service.getUserByEmail("dummyemail@gmail.com")).thenReturn(Constants.MOCK_USER_OBJECT);
+		
+		assertEquals(Constants.MOCK_USER_OBJECT, controller.getUserByEmail("dummyemail@gmail.com"));
+
+	}
+	
+	@Test
 	public void testCreateUser() {
 		Mockito.when(service.createUser(Constants.MOCK_USER_OBJECT)).thenReturn("{\"message\": \"User successfully added.\"}");
 		assertEquals("{\"message\": \"User successfully added.\"}", controller.createUser(Constants.MOCK_USER_OBJECT));

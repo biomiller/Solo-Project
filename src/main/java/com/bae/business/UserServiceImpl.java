@@ -43,4 +43,9 @@ public class UserServiceImpl implements UserService{
 		return userRepo.addEvent(userId, eventId);
 	}
 
+	@Override
+	public String getUserByEmail(String email) {
+		return userRepo.getUserByEmail(email);
+	}
+
 }

@@ -17,14 +17,14 @@ public class EventController {
 	@Inject
 	private EventServiceImpl service;
 	
-	@Path("getAllEvents")
+	@Path("/getAllEvents")
 	@GET
 	@Produces({ "application/JSON" })
 	public String getAllEvents() {
 		return service.getAllEvents(); 
 	}
 
-	@Path("getEvent/{id}")
+	@Path("/getEvent/{id}")
 	@GET
 	@Produces({ "application/JSON" })
 	public String getEvent(@PathParam("id") int id) {

@@ -40,6 +40,12 @@ public class UserDBRepository implements UserRepository {
 	public String getUser(int id) {
 		return util.getJSONForObject(manager.find(User.class, id));
 	}
+	
+	public String getUserByEmail(String email) {
+		Query query = manager.createQuery("Select a FROM User a WHERE a.email = :email");
+		User user = (User) query.setParameter("email", email).getSingleResult();
+		return util.getJSONForObject(user);
+	}
 
 	@Override
 	@Transactional(REQUIRED)

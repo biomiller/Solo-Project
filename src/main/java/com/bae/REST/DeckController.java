@@ -16,7 +16,7 @@ public class DeckController {
 	@Inject
 	private DeckServiceImpl service;
 	
-	@Path("getAllDecks")
+	@Path("/getAllDecks")
 	@GET
 	@Produces({ "application/JSON" })
 	public String getAllDecks() {
@@ -24,14 +24,14 @@ public class DeckController {
 	}
 	
 	
-	@Path("getDeck/{id}")
+	@Path("/getDeck/{id}")
 	@GET
 	@Produces({ "application/JSON" })
 	public String getDeck(@PathParam("id") int id) {
 		return service.getDeck(id);
 	}
 	
-	@Path("deleteDeck/{id}")
+	@Path("/deleteDeck/{id}")
 	@DELETE
 	@Produces({ "application/JSON" })
 	public String deleteDeck(@PathParam("id") int id) {
