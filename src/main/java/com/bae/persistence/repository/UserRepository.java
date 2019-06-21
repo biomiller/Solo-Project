@@ -9,6 +9,7 @@ public interface UserRepository {
 	String updateUser(int id, String user);
 	String createDeck(int id, String deck);
 	String addEvent(int userId, int eventId);
+	String removeEvent(int userId, int eventId);
 
 
 }

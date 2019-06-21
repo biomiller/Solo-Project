@@ -100,4 +100,14 @@ public class UserServiceImplTest {
 		
 		
 	}
+	
+	@Test
+	public void testRemoveEvent() {
+						
+		Mockito.when(repo.removeEvent(0, 1)).thenReturn("{\"message\": \"Event successfully removed from user.\"}");
+
+		assertEquals("{\"message\": \"Event successfully removed from user.\"}", service.removeEvent(0, 1));
+		
+		
+	}
 }

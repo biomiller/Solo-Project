@@ -10,5 +10,6 @@ public interface UserService {
 	String createDeck(int id, String deck);
 	String addEvent(int userId, int eventId);
 	String getUserByEmail(String email);
+	String removeEvent(int userId, int eventId);
 
 }

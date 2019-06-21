@@ -100,5 +100,15 @@ public class UserControllerTest {
 		
 		
 	}
+	
+	@Test
+	public void testRemoveEvent() {
+						
+		Mockito.when(service.removeEvent(0, 1)).thenReturn("{\"message\": \"Event successfully removed from user.\"}");
+
+		assertEquals("{\"message\": \"Event successfully removed from user.\"}", controller.removeEvent(0, 1));
+		
+		
+	}
 
 }

@@ -59,11 +59,18 @@ public class UserController {
 		return service.createDeck(id, deck);
 	}
 	
-	@Path("/addEvent/{id}")
+	@Path("/addEvent/{userId}/{eventId}")
 	@POST
 	@Produces({"application/json"})
-	public String addEvent(@PathParam("id") int userId, int eventId) {
+	public String addEvent(@PathParam("userId") int userId,@PathParam("eventId") int eventId) {
 		return service.addEvent(userId, eventId);
+	}
+	
+	@Path("/removeEvent/{userId}/{eventId}")
+	@DELETE
+	@Produces({"application/json"})
+	public String removeEvent(@PathParam("userId") int userId,@PathParam("eventId") int eventId) {
+		return service.removeEvent(userId, eventId);
 	}
 	
 	@Path("/updateUser/{id}")

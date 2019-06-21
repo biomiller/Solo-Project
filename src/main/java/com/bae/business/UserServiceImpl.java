@@ -42,6 +42,11 @@ public class UserServiceImpl implements UserService{
 	public String addEvent(int userId, int eventId) {
 		return userRepo.addEvent(userId, eventId);
 	}
+	
+	@Override
+	public String removeEvent(int userId, int eventId) {
+		return userRepo.removeEvent(userId, eventId);
+	}
 
 	@Override
 	public String getUserByEmail(String email) {

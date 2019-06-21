@@ -1,6 +1,9 @@
 
-//const HOSTURL = `http://localhost:8080/TopDeck/api`;
-const HOSTURL = `http://35.189.85.82:8888/TopDeck/api`;
+let path = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
+
+const HOSTURL = `http://localhost:8080/TopDeck/api`;
+//const HOSTURL = `http://35.189.85.82:8888/TopDeck/api`;
+//const HOSTURL = path + "/TopDeck/api";
 
 function makeRequest(method, url, body) {
 
@@ -87,8 +90,6 @@ function getUserDecks(input) {
 
     }
 }
-
-
 
 const clickDeleteDeck = (e) => {
 
@@ -271,57 +272,6 @@ function fillUserFields() {
 }
 
 
-
-
-const clickGetallUsers = () => {
-    makeRequest("GET", HOSTURL + `/Users/getAllUsers`)
-        .then((resolve) => { getAllUsers(resolve) })
-        .catch(function (error) { console.log(error.message) })
-
-    return false;
-}
-
-function getAllUsers(input) {
-
-    let allUsers = JSON.parse(input);
-
-    while (document.getElementById("usersTable").rows.length > 1) {
-        document.getElementById("usersTable").deleteRow(1);
-    }
-
-    for (let i = 0; i < allUsers.length; i++) {
-
-        let newRow = document.createElement('TR');
-
-        newRow.id = "row" + allUsers[i].userId;
-
-        document.getElementById("usersTable").appendChild(newRow);
-
-        let td1 = document.createElement('TD');
-        document.getElementById("row" + allUsers[i].userId).appendChild(td1);
-        td1.innerText = allUsers[i].name;
-
-        let td2 = document.createElement('TD');
-        document.getElementById("row" + allUsers[i].userId).appendChild(td2);
-        td2.innerText = allUsers[i].email;
-
-        let td3 = document.createElement('TD');
-        document.getElementById("row" + allUsers[i].userId).appendChild(td3);
-
-        for (let x = 0; x < allUsers[i].decks.length; x++) {
-            let newLink = document.createElement('a');
-            newLink.style = "color:Red;text-decoration:underline;cursor:pointer";
-            newLink.id = allUsers[i].decks[x].deckId;
-            newLink.innerText = allUsers[i].decks[x].name + " ";
-            newLink.onclick = deckDetails;
-            td3.appendChild(newLink);
-        }
-
-    }
-
-}
-
-
 function clickGetDeck() {
     makeRequest("GET", HOSTURL + `/Decks/getDeck/${sessionStorage.getItem('deckId')}`)
         .then((resolve) => { parseStoreDeck(resolve) })
@@ -335,7 +285,8 @@ const clickSignIn = () => {
     makeRequest("GET", HOSTURL + `/Users/getUserByEmail/${document.getElementById("loginEmail").value}`)
         .then((resolve) => { signIn(resolve) })
         .catch(function (error) {
-            document.getElementById("loginEmail").value = "User not found!";
+            document.getElementById("loginEmail").placeholder = "User not found!";
+            document.getElementById("loginEmail").value = "";
         })
 
     return false;
@@ -370,37 +321,213 @@ const clickGetAllDecks = () => {
 
 function getAllDecks(input) {
 
-    console.log(input);
-
     let allDecks = JSON.parse(input);
 
-    console.log(allDecks[0]);
+    for (let x = 0; x < allDecks.length; x++) {
 
-        for (let x = 0; x < allDecks.length; x++) {
+        let newDeck = document.createElement('p');
+        newDeck.innerText = allDecks[x].name;
+        newDeck.style = "background-color: Black;color: white;padding: 18px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px;active;collapsible:hover {background-color: #555;}"
+        document.getElementById("decks").appendChild(newDeck);
 
-            let newDeck = document.createElement('p');
-            newDeck.innerText = allDecks[x].name;
-            newDeck.style = "background-color: Black;color: white;padding: 18px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px;active;collapsible:hover {background-color: #555;}"
-            document.getElementById("decks").appendChild(newDeck);
+        let newDeckDiv = document.createElement('div');
+        newDeckDiv.class = "content";
+        newDeckDiv.id = allDecks[x].deckId + "Div";
+        document.getElementById("decks").appendChild(newDeckDiv);
 
-            let newDeckDiv = document.createElement('div');
-            newDeckDiv.class = "content";
-            newDeckDiv.id = allDecks[x].deckId + "Div";
-            document.getElementById("decks").appendChild(newDeckDiv);
+        let newDeckDetails = document.createElement('div');
 
-            let newDeckDetails = document.createElement('div');
+        let cards = allDecks[x].cards;
+        let formatedCards = cards.split(",").join("\n");
+        newDeckDetails.innerText = formatedCards;
 
-            let cards = allDecks[x].cards;
-            let formatedCards = cards.split(",").join("\n");
-            newDeckDetails.innerText = formatedCards;
+        newDeckDetails.class = "columns";
+        newDeckDetails.style = "column-count: 4;";
+        newDeckDetails.id = allDecks[x].deckId + "Details";
+        document.getElementById(allDecks[x].deckId + "Div").appendChild(newDeckDetails);
 
-            newDeckDetails.class = "columns";
-            newDeckDetails.style = "column-count: 4;";
-            newDeckDetails.id = allDecks[x].deckId + "Details";
-            document.getElementById(allDecks[x].deckId + "Div").appendChild(newDeckDetails);
+        document.getElementById(allDecks[x].deckId + "Div").appendChild(document.createElement('br'));
+        document.getElementById(allDecks[x].deckId + "Div").appendChild(document.createElement('br'));
 
-            document.getElementById(allDecks[x].deckId + "Div").appendChild(document.createElement('br'));
-            document.getElementById(allDecks[x].deckId + "Div").appendChild(document.createElement('br'));
-        
     }
 }
+
+const clickGetAllEvents = () => {
+
+    makeRequest("GET", HOSTURL + `/Events/getAllEvents`)
+        .then((resolve) => { getAllEvents(resolve) })
+        .catch(function (error) {
+            console.log(error.message);
+
+        })
+
+    return false;
+}
+
+function getAllEvents(input) {
+
+    let AllEvents = JSON.parse(input);
+
+    for (let x = 0; x < AllEvents.length; x++) {
+
+        let newEvent = document.createElement('p');
+        newEvent.innerText = AllEvents[x].name;
+        newEvent.style = "background-color: Black;color: white;padding: 18px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px;active;collapsible:hover {background-color: #555;}"
+        document.getElementById("events").appendChild(newEvent);
+
+        let newEventDiv = document.createElement('div');
+        newEventDiv.class = "content";
+        newEventDiv.id = AllEvents[x].eventId + "Div";
+        document.getElementById("events").appendChild(newEventDiv);
+
+        let newEventLocation = document.createElement('div');
+        newEventLocation.innerText = "Location: " + AllEvents[x].location;
+        document.getElementById(AllEvents[x].eventId + "Div").appendChild(newEventLocation);
+
+        let newEventFormat = document.createElement('div');
+        newEventFormat.innerText = "Format: " + AllEvents[x].format;
+        document.getElementById(AllEvents[x].eventId + "Div").appendChild(newEventFormat);
+
+        let newEventDate = document.createElement('div');
+        newEventDate.innerText = "Date: " + AllEvents[x].eventDate;
+        document.getElementById(AllEvents[x].eventId + "Div").appendChild(newEventDate);
+
+        let newEventStar = document.createElement('p');
+        newEventStar.innerText = "Star";
+        newEventStar.id = AllEvents[x].eventId + "star";
+        newEventStar.style = "cursor: pointer;background-color: #777;color: white;padding: 5px;width: 25%;border: none;text-align: left;outline: none;font-size: 15px;";
+        newEventStar.onclick = clickStarEvent;
+        document.getElementById(AllEvents[x].eventId + "Div").appendChild(newEventStar);
+
+        document.getElementById(AllEvents[x].eventId + "Div").appendChild(document.createElement('br'));
+        document.getElementById(AllEvents[x].eventId + "Div").appendChild(document.createElement('br'));
+
+    }
+}
+
+const clickStarEvent = (e) => {
+
+    let eventId = e.target.getAttribute('id').substring(0, 1);
+
+    makeRequest("POST", HOSTURL + `/Users/addEvent/${sessionStorage.getItem("userId")}/`+ eventId)
+        .then((resolve) => { location.href = 'all_events.html' })
+        .catch(function (error) { console.log(error.message) })
+
+    return false;
+}
+
+
+const clickGetUserEvents = () => {
+
+    makeRequest("GET", HOSTURL + `/Users/getUser/${sessionStorage.getItem("userId")}`)
+        .then((resolve) => { getUserEvents(resolve) })
+        .catch(function (error) {
+            console.log(error.message);
+
+        })
+
+    return false;
+}
+function getUserEvents(input) {
+
+    let user = JSON.parse(input);
+
+    for (let x = 0; x < user.events.length; x++) {
+
+        let newEvent = document.createElement('p');
+        newEvent.innerText = user.events[x].name;
+        newEvent.style = "background-color: Black;color: white;padding: 18px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px;active;collapsible:hover {background-color: #555;}"
+        document.getElementById("events").appendChild(newEvent);
+
+        let newEventDiv = document.createElement('div');
+        newEventDiv.class = "content";
+        newEventDiv.id = user.events[x].eventId + "Div";
+        document.getElementById("events").appendChild(newEventDiv);
+
+        let newEventLocation = document.createElement('div');
+        newEventLocation.innerText = "Location: " + user.events[x].location;
+        document.getElementById(user.events[x].eventId + "Div").appendChild(newEventLocation);
+
+        let newEventFormat = document.createElement('div');
+        newEventFormat.innerText = "Format: " + user.events[x].format;
+        document.getElementById(user.events[x].eventId + "Div").appendChild(newEventFormat);
+
+        let newEventDate = document.createElement('div');
+        newEventDate.innerText = "Date: " + user.events[x].eventDate;
+        document.getElementById(user.events[x].eventId + "Div").appendChild(newEventDate);
+
+        let newEventRemove = document.createElement('p');
+        newEventRemove.innerText = "Remove";
+        newEventRemove.id = user.events[x].eventId + "remove";
+        newEventRemove.style = "cursor: pointer;background-color: #777;color: white;padding: 5px;width: 25%;border: none;text-align: left;outline: none;font-size: 15px;";
+        newEventRemove.onclick = clickRemoveEvent;
+        document.getElementById(user.events[x].eventId + "Div").appendChild(newEventRemove);
+
+        document.getElementById(user.events[x].eventId + "Div").appendChild(document.createElement('br'));
+        document.getElementById(user.events[x].eventId + "Div").appendChild(document.createElement('br'));
+
+    }
+}
+
+const clickRemoveEvent = (e) => {
+
+    let eventId = e.target.getAttribute('id').substring(0, 1);
+
+    makeRequest("DELETE", HOSTURL + `/Users/removeEvent/${sessionStorage.getItem("userId")}`+`/`+ eventId)
+        .then((resolve) => { location.href = 'user_events.html' })
+        .catch(function (error) { console.log(error.message) })
+
+    return false;
+}
+
+
+
+
+
+// const clickGetallUsers = () => {
+//     makeRequest("GET", HOSTURL + `/Users/getAllUsers`)
+//         .then((resolve) => { getAllUsers(resolve) })
+//         .catch(function (error) { console.log(error.message) })
+
+//     return false;
+// }
+
+// function getAllUsers(input) {
+
+//     let allUsers = JSON.parse(input);
+
+//     while (document.getElementById("usersTable").rows.length > 1) {
+//         document.getElementById("usersTable").deleteRow(1);
+//     }
+
+//     for (let i = 0; i < allUsers.length; i++) {
+
+//         let newRow = document.createElement('TR');
+
+//         newRow.id = "row" + allUsers[i].userId;
+
+//         document.getElementById("usersTable").appendChild(newRow);
+
+//         let td1 = document.createElement('TD');
+//         document.getElementById("row" + allUsers[i].userId).appendChild(td1);
+//         td1.innerText = allUsers[i].name;
+
+//         let td2 = document.createElement('TD');
+//         document.getElementById("row" + allUsers[i].userId).appendChild(td2);
+//         td2.innerText = allUsers[i].email;
+
+//         let td3 = document.createElement('TD');
+//         document.getElementById("row" + allUsers[i].userId).appendChild(td3);
+
+//         for (let x = 0; x < allUsers[i].decks.length; x++) {
+//             let newLink = document.createElement('a');
+//             newLink.style = "color:Red;text-decoration:underline;cursor:pointer";
+//             newLink.id = allUsers[i].decks[x].deckId;
+//             newLink.innerText = allUsers[i].decks[x].name + " ";
+//             newLink.onclick = deckDetails;
+//             td3.appendChild(newLink);
+//         }
+
+//     }
+
+// }
