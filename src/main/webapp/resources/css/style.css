@@ -1,5 +1,18 @@
-.deckDetailsLink{
-    color: Green;
+body {
+    background-image: url("../wood_decking.jpg");
+}
+
+.navbar{
+    background-color: black;
+}
+
+.mainBox{
+    background-color: antiquewhite;
+    min-height: 950px;
+    height: auto !important;
+    height: 950px;
+    border-radius: 25px;
+    padding-bottom: 15px;
 }
 
 #Title{

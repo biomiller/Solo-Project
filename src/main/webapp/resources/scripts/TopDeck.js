@@ -47,13 +47,13 @@ function getUserDecks(input) {
 
     for (let x = 0; x < user.decks.length; x++) {
 
-        let newDeck = document.createElement('p');
+        let newDeck = document.createElement('div');
         newDeck.innerText = user.decks[x].name;
         newDeck.style = "background-color: Black;color: white;padding: 18px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px;active;collapsible:hover {background-color: #555;}"
         document.getElementById("decks").appendChild(newDeck);
 
         let newDeckDiv = document.createElement('div');
-        newDeckDiv.class = "content";
+        newDeckDiv.style = "border-style: solid; border-color: black; padding: 20px;";
         newDeckDiv.id = user.decks[x].deckId + "Div";
         document.getElementById("decks").appendChild(newDeckDiv);
 
@@ -68,7 +68,6 @@ function getUserDecks(input) {
         newDeckDetails.id = user.decks[x].deckId + "Details";
         document.getElementById(user.decks[x].deckId + "Div").appendChild(newDeckDetails);
 
-        document.getElementById(user.decks[x].deckId + "Div").appendChild(document.createElement('br'));
         document.getElementById(user.decks[x].deckId + "Div").appendChild(document.createElement('br'));
 
 
@@ -327,13 +326,13 @@ function getAllDecks(input) {
 
     for (let x = 0; x < allDecks.length; x++) {
 
-        let newDeck = document.createElement('p');
+        let newDeck = document.createElement('div');
         newDeck.innerText = allDecks[x].name;
         newDeck.style = "background-color: Black;color: white;padding: 18px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px;active;collapsible:hover {background-color: #555;}"
         document.getElementById("decks").appendChild(newDeck);
 
         let newDeckDiv = document.createElement('div');
-        newDeckDiv.class = "content";
+        newDeckDiv.style = "border-style: solid; border-color: black; padding: 25px;";
         newDeckDiv.id = allDecks[x].deckId + "Div";
         document.getElementById("decks").appendChild(newDeckDiv);
 
@@ -341,15 +340,13 @@ function getAllDecks(input) {
 
         let cards = allDecks[x].cards;
         let formatedCards = cards.split(",").join("\n");
+        
         newDeckDetails.innerText = formatedCards;
-
         newDeckDetails.class = "columns";
-        newDeckDetails.style = "column-count: 4;";
+        newDeckDetails.style = "column-count: 3;";
         newDeckDetails.id = allDecks[x].deckId + "Details";
         document.getElementById(allDecks[x].deckId + "Div").appendChild(newDeckDetails);
 
-        document.getElementById(allDecks[x].deckId + "Div").appendChild(document.createElement('br'));
-        document.getElementById(allDecks[x].deckId + "Div").appendChild(document.createElement('br'));
 
     }
 }
