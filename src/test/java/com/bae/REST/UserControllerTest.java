@@ -2,7 +2,6 @@ package com.bae.REST;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -24,9 +23,6 @@ public class UserControllerTest {
 	private UserServiceImpl service;
 	
 
-	@Before
-	public void setup() {
-	}
 	
 	@Test 
 	public void getAllUsersTest() {

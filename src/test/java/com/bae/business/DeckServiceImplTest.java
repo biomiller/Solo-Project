@@ -2,10 +2,6 @@ package com.bae.business;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,11 +10,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.bae.persistence.domain.Deck;
-import com.bae.persistence.domain.User;
 import com.bae.persistence.repository.DeckDBRepository;
 import com.bae.util.Constants;
-import com.bae.util.JSONUtil;
 
 @RunWith(MockitoJUnitRunner.class)
 

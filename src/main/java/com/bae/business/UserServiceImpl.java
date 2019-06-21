@@ -1,6 +1,5 @@
 package com.bae.business;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 
 import com.bae.persistence.domain.User;
 import com.bae.persistence.repository.UserDBRepository;
