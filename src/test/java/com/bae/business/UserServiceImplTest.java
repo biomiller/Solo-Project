@@ -50,15 +50,25 @@ public class UserServiceImplTest {
 	}
 	
 	@Test
+	public void testGetUserByEmail() {
+
+
+		Mockito.when(repo.getUserByEmail("dummyemail@gmail.com")).thenReturn(Constants.MOCK_USER_OBJECT);
+		
+		assertEquals(Constants.MOCK_USER_OBJECT, service.getUserByEmail("dummyemail@gmail.com"));
+
+	}
+	
+	@Test
 	public void testCreateUser() {
 		Mockito.when(repo.createUser(Constants.MOCK_USER_OBJECT)).thenReturn("{\"message\": \"User successfully added.\"}");
-		assertEquals(service.createUser(Constants.MOCK_USER_OBJECT), "{\"message\": \"User successfully added.\"}");
+		assertEquals("{\"message\": \"User successfully added.\"}", service.createUser(Constants.MOCK_USER_OBJECT));
 	}
 	
 	@Test
 	public void testDeleteUser() {
 		Mockito.when(repo.deleteUser(0)).thenReturn("{\"message\": \"User deleted.\"}");
-		assertEquals(service.deleteUser(0), "{\"message\": \"User deleted.\"}");
+		assertEquals("{\"message\": \"User deleted.\"}", service.deleteUser(0));
 	}
 	
 	@Test
@@ -66,7 +76,7 @@ public class UserServiceImplTest {
 		
 		Mockito.when(repo.updateUser(0, Constants.MOCK_USER_OBJECT)).thenReturn("{\"message\": \"User updated.\"}");
 
-		assertEquals(service.updateUser(0,Constants.MOCK_USER_OBJECT), "{\"message\": \"User updated.\"}");
+		assertEquals("{\"message\": \"User updated.\"}", service.updateUser(0,Constants.MOCK_USER_OBJECT));
 		
 	}
 	
@@ -76,7 +86,7 @@ public class UserServiceImplTest {
 
 		Mockito.when(repo.createDeck(0, Constants.MOCK_DECK_OBJECT)).thenReturn("{\"message\": \"Deck successfully added.\"}");
 
-		assertEquals(service.createDeck(0, Constants.MOCK_DECK_OBJECT), "{\"message\": \"Deck successfully added.\"}");
+		assertEquals("{\"message\": \"Deck successfully added.\"}", service.createDeck(0, Constants.MOCK_DECK_OBJECT));
 		
 		
 	}
@@ -86,7 +96,7 @@ public class UserServiceImplTest {
 						
 		Mockito.when(repo.addEvent(0, 1)).thenReturn("{\"message\": \"Event successfully added to user.\"}");
 
-		assertEquals(service.addEvent(0, 1), "{\"message\": \"Event successfully added to user.\"}");
+		assertEquals("{\"message\": \"Event successfully added to user.\"}", service.addEvent(0, 1));
 		
 		
 	}

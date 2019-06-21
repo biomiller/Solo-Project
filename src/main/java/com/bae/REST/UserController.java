@@ -17,18 +17,25 @@ public class UserController {
 	@Inject
 	private UserServiceImpl service;
 	
-	@Path("getAllUsers")
+	@Path("/getAllUsers")
 	@GET
 	@Produces({ "application/JSON" })
 	public String getAllUsers() {
 		return service.getAllUsers();
 	}
 	
-	@Path("getUser/{id}")
+	@Path("/getUser/{id}")
 	@GET
 	@Produces({ "application/JSON" })
 	public String getUser(@PathParam("id") int id) {
 		return service.getUser(id);
+	}
+	
+	@Path("/getUserByEmail/{email}")
+	@GET
+	@Produces({ "application/JSON" })
+	public String getUserByEmail(@PathParam("email") String email) {
+		return service.getUserByEmail(email);
 	}
 	
 	@Path("/createUser")
@@ -38,7 +45,7 @@ public class UserController {
 		return service.createUser(user);
 	}
 	
-	@Path("deleteUser/{id}")
+	@Path("/deleteUser/{id}")
 	@DELETE
 	@Produces({ "application/JSON" })	
 	public String deleteUser(@PathParam("id") int id) {

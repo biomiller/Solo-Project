@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Homee</title>
+    <title>Create User</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         crossorigin="anonymous">
@@ -36,8 +36,23 @@
         </ul>
     </nav>
 
-    <h1>Home Page</h1>
+    <h1>New User</h1>
 
+    <form onsubmit="return createNewUser()">
+        <p>Name:
+            <input id="userName" type="text" placeholder="Name" required>
+        </p>
+
+        <p>Email:
+            <input id="userEmail" type="text" placeholder="Email" required>
+        </p>
+
+        <p>Password:
+            <input id="userPassword" type="text" placeholder="Password" required>
+        </p>
+
+        <button type="submit">Create User</button>
+    </form>
 
     <script src="../resources/scripts/TopDeck.js"></script>
 

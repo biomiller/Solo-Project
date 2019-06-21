@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Homee</title>
+    <title>Decks</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         crossorigin="anonymous">
@@ -17,26 +17,53 @@
 
 </head>
 
-<body>
+<body onload="clickGetUserDecks()">
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <a class="navbar-brand" id="Title">TopDeck</a>
 
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="home.html">Home</a>
+                <a class="nav-link" href="home_signed_in.html">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="sign_in.html">Sign In</a>
+                <a class="nav-link" href="#" onclick="signOut()">Sign Out</a>
             </li>
-
             <li class="nav-item">
-                <a class="nav-link" href="create_user.html">Sign Up</a>
+                <a class="nav-link" href="profile.html">Profile</a>
             </li>
 
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        Decks
+      </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="all_decks.html">All Decks</a>
+                    <a class="dropdown-item" href="user_decks.html">Your Decks</a>
+                    <a class="dropdown-item" href="create_deck.html">New Deck</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        Events
+      </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">All Events</a>
+                    <a class="dropdown-item" href="#">Your Events</a>
+                    <a class="dropdown-item" href="#">New Event</a>
+
+                </div>
+            </li>
+
+            
         </ul>
     </nav>
 
-    <h1>Home Page</h1>
+    <h1>Your Decks</h1>
+
+    <p class="container" id="decks"></p> 
+
 
 
     <script src="../resources/scripts/TopDeck.js"></script>

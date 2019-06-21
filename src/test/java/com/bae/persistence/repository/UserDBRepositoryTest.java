@@ -80,30 +80,55 @@ public class UserDBRepositoryTest {
 
 		User user = new User("Owen", "dummyemail@gmail.com", "password", decks, events);
 
+		
 		Mockito.when(manager.find(User.class, 0)).thenReturn(user);
 
 		assertEquals(Constants.MOCK_USER_OBJECT, repo.getUser(0));
+
+	}
+	
+	@Test
+	public void testGetUserByEmail() {
+
+		Mockito.when(manager.createQuery(Mockito.anyString())).thenReturn(query);
+
+		Set<Deck> decks = new HashSet<Deck>();
+		Deck deck = new Deck();
+		decks.add(deck);
+
+		Set<Event> events = new HashSet<Event>();
+		Event event = new Event();
+		events.add(event);
+
+		User user = new User("Owen", "dummyemail@gmail.com", "password", decks, events);
+		
+		String email = "dummyemail@gmail.com";
+		
+		Mockito.when(query.setParameter("email", email)).thenReturn(query);
+		Mockito.when(query.getSingleResult()).thenReturn(user);
+
+		assertEquals(Constants.MOCK_USER_OBJECT, repo.getUserByEmail(email));
 
 	}
 
 	@Test
 	public void testCreateUser() {
 		String reply = repo.createUser(Constants.MOCK_USER_OBJECT);
-		assertEquals(reply, "{\"message\": \"User successfully added.\"}");
+		assertEquals("{\"message\": \"User successfully added.\"}", reply);
 	}
 
 	@Test
 	public void testDeleteUser() {
 		Mockito.when(manager.contains(manager.find(User.class, 1))).thenReturn(true);
 		String reply = repo.deleteUser(0);
-		assertEquals(reply, "{\"message\": \"User deleted.\"}");
+		assertEquals("{\"message\": \"User deleted.\"}", reply);
 	}
 
 	@Test
 	public void testDeleteUserNotExist() {
 		Mockito.when(manager.contains(manager.find(User.class, 5))).thenReturn(false);
 		String reply = repo.deleteUser(5);
-		assertEquals(reply, "{\"message\": \"User not found.\"}");
+		assertEquals("{\"message\": \"User not found.\"}", reply);
 	}
 
 	@Test
@@ -123,7 +148,7 @@ public class UserDBRepositoryTest {
 		Mockito.when(manager.find(User.class, 1)).thenReturn(user);
 
 		String reply = repo.updateUser(1, util.getJSONForObject(compUser));
-		assertEquals(reply, "{\"message\": \"User updated.\"}");
+		assertEquals("{\"message\": \"User updated.\"}", reply);
 
 	}
 
@@ -144,7 +169,7 @@ public class UserDBRepositoryTest {
 		Mockito.when(manager.find(User.class, 2)).thenReturn(null);
 
 		String reply = repo.updateUser(1, util.getJSONForObject(compUser));
-		assertEquals(reply, "{\"message\": \"User not found.\"}");
+		assertEquals("{\"message\": \"User not found.\"}", reply);
 
 	}
 
@@ -164,7 +189,7 @@ public class UserDBRepositoryTest {
 		Mockito.when(manager.find(User.class, 1)).thenReturn(user);
 
 		String reply = repo.updateUser(1, util.getJSONForObject(compUser));
-		assertEquals(reply, "{\"message\": \"User updated.\"}");
+		assertEquals("{\"message\": \"User updated.\"}", reply);
 
 	}
 
@@ -185,7 +210,7 @@ public class UserDBRepositoryTest {
 		Mockito.when(manager.find(User.class, 1)).thenReturn(user);
 
 		String reply = repo.createDeck(1, util.getJSONForObject(newDeck));
-		assertEquals(reply, "{\"message\": \"Deck successfully added.\"}");
+		assertEquals("{\"message\": \"Deck successfully added.\"}", reply);
 	}
 	
 	@Test
@@ -208,7 +233,7 @@ public class UserDBRepositoryTest {
 
 
 		String reply = repo.addEvent(1, 1);
-		assertEquals(reply, "{\"message\": \"Event successfully added to user.\"}");
+		assertEquals("{\"message\": \"Event successfully added to user.\"}", reply);
 	}
 
 }

@@ -74,21 +74,21 @@ public class EventDBRepositoryTest {
 	@Test
 	public void testCreateEvent() {
 		String reply = repo.createEvent(Constants.MOCK_EVENT_OBJECT);
-		assertEquals(reply, "{\"message\": \"Event successfully created.\"}");
+		assertEquals("{\"message\": \"Event successfully created.\"}", reply);
 	}
 	
 	@Test
 	public void testDeleteEvent() {
 		Mockito.when(manager.contains(manager.find(Event.class, 1))).thenReturn(true);
 		String reply = repo.deleteEvent(0);
-		assertEquals(reply, "{\"message\": \"Event deleted.\"}");
+		assertEquals("{\"message\": \"Event deleted.\"}", reply);
 	}
 	
 	@Test
 	public void testDeleteEventNotExist() {
 		Mockito.when(manager.contains(manager.find(Event.class, 5))).thenReturn(false);
 		String reply = repo.deleteEvent(5);
-		assertEquals(reply, "{\"message\": \"Event not found.\"}");
+		assertEquals("{\"message\": \"Event not found.\"}", reply);
 	}
 	
 	@Test
@@ -101,7 +101,7 @@ public class EventDBRepositoryTest {
 		Mockito.when(manager.find(Event.class, 1)).thenReturn(event);
 
 		String reply = repo.updateEvent(1, util.getJSONForObject(compEvent));
-		assertEquals(reply, "{\"message\": \"Event updated.\"}");
+		assertEquals("{\"message\": \"Event updated.\"}", reply);
 
 	}
 	
@@ -115,7 +115,7 @@ public class EventDBRepositoryTest {
 		Mockito.when(manager.find(Event.class, 6)).thenReturn(null);
 
 		String reply = repo.updateEvent(1, util.getJSONForObject(compEvent));
-		assertEquals(reply, "{\"message\": \"Event not found.\"}");
+		assertEquals("{\"message\": \"Event not found.\"}", reply);
 
 	}
 	
@@ -129,7 +129,7 @@ public class EventDBRepositoryTest {
 		Mockito.when(manager.find(Event.class, 1)).thenReturn(event);
 
 		String reply = repo.updateEvent(1, util.getJSONForObject(compEvent));
-		assertEquals(reply, "{\"message\": \"Event updated.\"}");
+		assertEquals("{\"message\": \"Event updated.\"}", reply);
 
 	}
 }

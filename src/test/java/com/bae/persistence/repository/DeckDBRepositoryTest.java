@@ -73,14 +73,14 @@ public class DeckDBRepositoryTest {
 	public void testDeleteDeck() {
 		Mockito.when(manager.contains(manager.find(Deck.class, 0))).thenReturn(true);
 		String reply = repo.deleteDeck(0);
-		assertEquals(reply, "{\"message\": \"Deck deleted.\"}");
+		assertEquals("{\"message\": \"Deck deleted.\"}", reply);
 	}
 
 	@Test
 	public void testDeleteDeckNotExist() {
 		Mockito.when(manager.contains(manager.find(Deck.class, 1))).thenReturn(false);
 		String reply = repo.deleteDeck(1);
-		assertEquals(reply, "{\"message\": \"Deck not found.\"}");
+		assertEquals("{\"message\": \"Deck not found.\"}", reply);
 	}
 
 	@Test
@@ -95,7 +95,7 @@ public class DeckDBRepositoryTest {
 		Mockito.when(manager.find(Deck.class, 0)).thenReturn(deck);
 
 		String reply = repo.updateDeck(0, util.getJSONForObject(compDeck));
-		assertEquals(reply, "{\"message\": \"Deck updated.\"}");
+		assertEquals("{\"message\": \"Deck updated.\"}", reply);
 
 	}
 
@@ -111,7 +111,7 @@ public class DeckDBRepositoryTest {
 		Mockito.when(manager.find(Deck.class, 1)).thenReturn(null);
 
 		String reply = repo.updateDeck(1, util.getJSONForObject(compDeck));
-		assertEquals(reply, "{\"message\": \"Deck not found.\"}");
+		assertEquals("{\"message\": \"Deck not found.\"}", reply);
 
 	}
 
@@ -127,7 +127,7 @@ public class DeckDBRepositoryTest {
 		Mockito.when(manager.find(Deck.class, 0)).thenReturn(deck);
 
 		String reply = repo.updateDeck(0, util.getJSONForObject(compDeck));
-		assertEquals(reply, "{\"message\": \"Deck updated.\"}");
+		assertEquals("{\"message\": \"Deck updated.\"}", reply);
 
 	}
 

@@ -48,13 +48,13 @@ public class EventControllerTest {
 	@Test
 	public void createEventTest() {
 		Mockito.when(service.createEvent(Constants.MOCK_EVENT_OBJECT)).thenReturn("{\"message\": \"Event successfully created.\"}");
-		assertEquals(controller.createEvent(Constants.MOCK_EVENT_OBJECT),"{\"message\": \"Event successfully created.\"}");
+		assertEquals("{\"message\": \"Event successfully created.\"}", controller.createEvent(Constants.MOCK_EVENT_OBJECT));
 	}
 
 	@Test
 	public void deleteEventTest() {
 		Mockito.when(service.deleteEvent(0)).thenReturn("{\"message\": \"Event deleted.\"}");
-		assertEquals(controller.deleteEvent(0), "{\"message\": \"Event deleted.\"}");
+		assertEquals("{\"message\": \"Event deleted.\"}", controller.deleteEvent(0));
 	}
 
 	@Test
@@ -63,7 +63,7 @@ public class EventControllerTest {
 		Mockito.when(service.updateEvent(0, Constants.MOCK_EVENT_OBJECT))
 				.thenReturn("{\"message\": \"Event updated.\"}");
 
-		assertEquals(controller.updateEvent(0, Constants.MOCK_EVENT_OBJECT), "{\"message\": \"Event updated.\"}");
+		assertEquals("{\"message\": \"Event updated.\"}", controller.updateEvent(0, Constants.MOCK_EVENT_OBJECT));
 	}
 
 }

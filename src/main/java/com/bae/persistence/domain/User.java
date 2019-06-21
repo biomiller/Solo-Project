@@ -29,7 +29,7 @@ public class User {
 	private String password;
 	@OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId")
-	private Set<Deck> decks = new HashSet<Deck>();
+	private Set<Deck> decks = new HashSet<>();
 	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinTable(name = "event_user", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "eventId"))
 	private Set<Event> events;
