@@ -112,6 +112,16 @@ public class UserDBRepository implements UserRepository {
 		return "{\"message\": \"Event successfully added to user.\"}";
 	} 
 	
+	@Override
+	@Transactional(REQUIRED)
+	public String removeEvent(int userId, int eventId) {
+		Event event = manager.find(Event.class, eventId);
+		User user = manager.find(User.class, userId);
+		user.getEvents().remove(event);
+		manager.persist(user);
+		return "{\"message\": \"Event successfully removed from user.\"}";
+	} 
+	
 	public void setManager(EntityManager manager) {
 		this.manager = manager;
 	}

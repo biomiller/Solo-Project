@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Decks</title>
+    <title>All Events</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         crossorigin="anonymous">
@@ -17,7 +17,7 @@
 
 </head>
 
-<body onload="clickGetAllDecks()">
+<body onload="clickGetAllEvents()">
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <a class="navbar-brand" id="Title">TopDeck</a>
 
@@ -29,7 +29,7 @@
                 <a class="nav-link" href="#" onclick="signOut()">Sign Out</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="profile.html">Profile</a>
+                <a class="nav-link" href="profile.html" >Profile</a>
             </li>
 
             <!-- Dropdown -->
@@ -60,10 +60,9 @@
         </ul>
     </nav>
 
-    <h1>All Decks</h1>
+    <h1>All Events</h1>
 
-    <p class="container" id="decks"></p> 
-
+    <p class="container" id="events"></p> 
 
 
     <script src="../resources/scripts/TopDeck.js"></script>

@@ -235,5 +235,28 @@ public class UserDBRepositoryTest {
 		String reply = repo.addEvent(1, 1);
 		assertEquals("{\"message\": \"Event successfully added to user.\"}", reply);
 	}
+	
+	@Test
+	public void removeEventTest() {
+		Set<Deck> decks = new HashSet<Deck>();
+		Deck deck = new Deck();
+		decks.add(deck);
+
+		Set<Event> events = new HashSet<Event>();
+		Event event = new Event();
+		events.add(event);
+
+		User user = new User("Owen", "dummyemail@gmail.com", "password", decks, events);
+
+		Event newEvent = new Event();
+
+
+		Mockito.when(manager.find(User.class, 1)).thenReturn(user);
+		Mockito.when(manager.find(Event.class, 1)).thenReturn(newEvent);
+
+
+		String reply = repo.removeEvent(1, 1);
+		assertEquals("{\"message\": \"Event successfully removed from user.\"}", reply);
+	}
 
 }
