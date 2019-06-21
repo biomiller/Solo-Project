@@ -45,7 +45,7 @@ public class UserControllerTest {
 
 		Mockito.when(service.getUser(0)).thenReturn(Constants.MOCK_USER_OBJECT);
 		
-		assertEquals(Constants.MOCK_USER_OBJECT, controller.getUser(0));
+		assertEquals(Constants.MOCK_USER_OBJECT, controller.getUser(0)); 
 
 	}
 	
@@ -53,9 +53,9 @@ public class UserControllerTest {
 	public void testGetUserByEmail() {
 
 
-		Mockito.when(service.getUserByEmail("dummyemail@gmail.com")).thenReturn(Constants.MOCK_USER_OBJECT);
+		Mockito.when(service.getUserByEmail("dummyemail@gmail.com", "password")).thenReturn(Constants.MOCK_USER_OBJECT);
 		
-		assertEquals(Constants.MOCK_USER_OBJECT, controller.getUserByEmail("dummyemail@gmail.com"));
+		assertEquals(Constants.MOCK_USER_OBJECT, controller.getUserByEmail("dummyemail@gmail.com", "password"));
 
 	}
 	

@@ -34,7 +34,7 @@ public class UserDBRepository implements UserRepository {
 		Collection<User> users = (Collection<User>) query.getResultList();
 
 		return util.getJSONForObject(users);
-	}
+	} 
 
 	@Override
 	public String getUser(int id) {

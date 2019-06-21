@@ -9,7 +9,7 @@ public interface UserService {
 	String getUser(int id);
 	String createDeck(int id, String deck);
 	String addEvent(int userId, int eventId);
-	String getUserByEmail(String email);
+	String getUserByEmail(String email, String password);
 	String removeEvent(int userId, int eventId);
 
 }

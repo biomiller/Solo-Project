@@ -10,8 +10,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.bae.persistence.domain.User;
 import com.bae.persistence.repository.UserDBRepository;
 import com.bae.util.Constants;
+import com.bae.util.JSONUtil;
 
 @RunWith(MockitoJUnitRunner.class)
 
@@ -22,16 +24,19 @@ public class UserServiceImplTest {
 
 	@Mock
 	private UserDBRepository repo;
+	private JSONUtil util;
 	
 	
 	@Before
 	public void setup() {
+		util = new JSONUtil();
+		service.setUtil(util);
 	}
 
-	@Test 
+	@Test  
 	public void getAllUsersTest() {
     	
-		
+		 
 		Mockito.when(repo.getAllUsers()).thenReturn(Constants.MOCK_USER_DATA_ARRAY);
 
 		
@@ -39,7 +44,7 @@ public class UserServiceImplTest {
 		
 	}
 	
-	@Test
+	@Test 
 	public void testGetUser() {
 
 
@@ -52,10 +57,9 @@ public class UserServiceImplTest {
 	@Test
 	public void testGetUserByEmail() {
 
-
 		Mockito.when(repo.getUserByEmail("dummyemail@gmail.com")).thenReturn(Constants.MOCK_USER_OBJECT);
-		
-		assertEquals(Constants.MOCK_USER_OBJECT, service.getUserByEmail("dummyemail@gmail.com"));
+				
+		assertEquals(Constants.MOCK_USER_OBJECT, service.getUserByEmail("dummyemail@gmail.com", "password"));
 
 	}
 	

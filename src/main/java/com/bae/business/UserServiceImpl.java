@@ -1,12 +1,18 @@
 package com.bae.business;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 
+import com.bae.persistence.domain.User;
 import com.bae.persistence.repository.UserDBRepository;
+import com.bae.util.JSONUtil;
 
 public class UserServiceImpl implements UserService{
 	
 	@Inject
-	UserDBRepository userRepo;
+	private UserDBRepository userRepo;
+
+	@Inject
+	private JSONUtil util;
 
 	@Override
 	public String getAllUsers() {
@@ -49,8 +55,28 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public String getUserByEmail(String email) {
-		return userRepo.getUserByEmail(email);
+	public String getUserByEmail(String email, String password) {
+		
+		String dbUserJSON = userRepo.getUserByEmail(email);
+				
+		User dbUser = util.getObjectForJSON(dbUserJSON, User.class);
+		
+		String dbUserPassword = dbUser.getPassword();
+		
+		if (dbUserPassword.equals(password)) {
+			return dbUserJSON;
+		}
+		else{
+			return "{\"message\": \"Password Incorrect\"}";
+		}
+	}
+	
+	public void setRepo(UserDBRepository userRepo) {
+		this.userRepo = userRepo;
+	}
+	
+	public void setUtil(JSONUtil util) {
+		this.util = util; 
 	}
 
 }

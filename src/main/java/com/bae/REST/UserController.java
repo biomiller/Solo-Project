@@ -31,14 +31,14 @@ public class UserController {
 		return service.getUser(id);
 	}
 	
-	@Path("/getUserByEmail/{email}")
+	@Path("/getUserByEmail/{email}/{password}")
 	@GET
 	@Produces({ "application/JSON" })
-	public String getUserByEmail(@PathParam("email") String email) {
-		return service.getUserByEmail(email);
+	public String getUserByEmail(@PathParam("email") String email, @PathParam("password") String password) {
+		return service.getUserByEmail(email, password);
 	}
 	
-	@Path("/createUser")
+	@Path("/createUser") 
 	@POST
 	@Produces({"application/json"})
 	public String createUser(String user) {
@@ -70,7 +70,7 @@ public class UserController {
 	@DELETE
 	@Produces({"application/json"})
 	public String removeEvent(@PathParam("userId") int userId,@PathParam("eventId") int eventId) {
-		return service.removeEvent(userId, eventId);
+		return service.removeEvent(userId, eventId); 
 	}
 	
 	@Path("/updateUser/{id}")
