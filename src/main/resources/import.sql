@@ -25,11 +25,16 @@ INSERT INTO DECK(name,format,cards) VALUES ('DraftM1904', 'M19', '1 Aven Wind Ma
 UPDATE DECK SET userId = 2 WHERE deckId = 3;
 UPDATE DECK SET userId = 2 WHERE deckId = 4;
 
-INSERT INTO EVENT(name, format, location, eventDate) VALUES ('M19 Prerelease', 'Sealed', 'Rogue Gaming', '2018-07-08');
+INSERT INTO EVENT(name, format, location, eventDate) VALUES ('M19 Prerelease', 'Sealed', 'Rogue Gaming', '2019-06-08');
 INSERT INTO EVENT_USER (eventId, userId) VALUES (1,1);
 INSERT INTO EVENT_USER (eventId, userId) VALUES (1,2);
 
-INSERT INTO EVENT(name, format, location, eventDate) VALUES ('M19 Draft', 'Limited', 'Rogue Gaming', '2018-07-09');
+INSERT INTO EVENT(name, format, location, eventDate) VALUES ('M19 Draft', 'Limited', 'Rogue Gaming', '2019-06-09');
 INSERT INTO EVENT_USER (eventId, userId) VALUES (2,2);
+
+INSERT INTO EVENT(name, format, location, eventDate) VALUES ('Friday Night Magic', 'Modern', 'Dark Sphere', '2019-06-07');
+INSERT INTO EVENT(name, format, location, eventDate) VALUES ('Friday Night Magic', 'Modern', 'Rogue Gaming', '2019-06-07');
+INSERT INTO EVENT(name, format, location, eventDate) VALUES ('War of the Spark Draft', 'Limited', 'Magic Madhouse', '2019-06-15');
+INSERT INTO EVENT(name, format, location, eventDate) VALUES ('Modern Horizon Sealed', 'Sealed', 'Dark Sphere', '2019-07-15');
 
 

@@ -91,8 +91,6 @@ function getUserDecks(input) {
     }
 }
 
-
-
 const clickDeleteDeck = (e) => {
 
     let deckId = e.target.getAttribute('id').substring(0, 1);
