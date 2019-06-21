@@ -15,7 +15,7 @@ function makeRequest(method, url, body) {
 
             req.onload = () => {
 
-                if (req.status >= 200 && req.status <= 299) {
+                if (req.status >= 200 && req.status <= 299 && req.responseText != "{\"message\": \"Password Incorrect\"}") {
                     resolve(req.responseText);
                 }
                 else {
@@ -282,11 +282,13 @@ function clickGetDeck() {
 
 const clickSignIn = () => {
 
-    makeRequest("GET", HOSTURL + `/Users/getUserByEmail/${document.getElementById("loginEmail").value}`)
+    makeRequest("GET", HOSTURL + `/Users/getUserByEmail/${document.getElementById("loginEmail").value}/${document.getElementById("loginPassword").value}`)
         .then((resolve) => { signIn(resolve) })
         .catch(function (error) {
             document.getElementById("loginEmail").placeholder = "User not found!";
             document.getElementById("loginEmail").value = "";
+            document.getElementById("loginPassword").placeholder = "Password Incorrect";
+            document.getElementById("loginPassword").value = "";
         })
 
     return false;
