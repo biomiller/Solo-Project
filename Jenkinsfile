@@ -16,6 +16,11 @@ pipeline{
                                 sh "mvn package"
                         }
                 }
+		stage('--sonar--'){
+                        steps{
+                                sh "mvn sonar:sonar"
+                        }
+                }
 		stage('--verify--'){
                         steps{
                                 sh "mvn verify"
