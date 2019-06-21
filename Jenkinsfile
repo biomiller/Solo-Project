@@ -1,6 +1,11 @@
 pipeline{
         agent any
         stages{
+		stage('---setup---'){
+                        steps{
+                                sh "sudo rm -rf /var/lib/wildfly-10.1.0.Final/standalone/deployments/*"
+                        }
+                }
                 stage('---clean---'){
                         steps{
                                 sh "mvn clean"
@@ -16,6 +21,11 @@ pipeline{
                                 sh "mvn package"
                         }
                 }
+		stage('--sonar--'){
+                        steps{
+                                sh "mvn sonar:sonar"
+                        }
+                }
 		stage('--verify--'){
                         steps{
                                 sh "mvn verify"
@@ -29,7 +39,7 @@ pipeline{
                 }
 		stage('--deploy--'){
                         steps{
-				sh "sudo cp /var/lib/jenkins/workspace/Solo-Project/target/TopDeck.war /home/g92millero/wildfly-10.1.0.Final/standalone/deployments"
+				sh "sudo cp /var/lib/jenkins/workspace/assessmentPipelineJob/target/TopDeck.war /var/lib/wildfly-10.1.0.Final/standalone/deployments"
                         }
                 }
         }
