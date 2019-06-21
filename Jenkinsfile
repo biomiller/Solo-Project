@@ -39,7 +39,7 @@ pipeline{
                 }
 		stage('--deploy--'){
                         steps{
-				sh "sudo cp /var/lib/jenkins/workspace/assessmentPipelineJob/target/TopDeck.war /var/lib/wildfly-10.1.0.Final/standalone/deployments"
+				sh "sudo cp /var/lib/jenkins/workspace/env.JOB_BASE_NAME/target/TopDeck.war /var/lib/wildfly-10.1.0.Final/standalone/deployments"
                         }
                 }
         }
