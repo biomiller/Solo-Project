@@ -27,6 +27,16 @@ body {
     padding-bottom: 15px;
 }
 
+.welcomeBox{
+    background-color: antiquewhite;
+    opacity: 0.95;
+    min-height: 300px;
+    height: auto !important;
+    border-radius: 25px;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
 .makeDeckBox{
     background-color: antiquewhite;
     min-height: 950px;

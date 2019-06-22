@@ -205,6 +205,8 @@ function updateUser() {
     let newUserObj = {};
 
     let name = document.getElementById("userName").value;
+    
+    sessionStorage.setItem("userName", name);
 
     newUserObj.name = name;
 
@@ -296,6 +298,7 @@ function signIn(input) {
     sessionStorage.setItem("user", input);
     let user = JSON.parse(input);
     sessionStorage.setItem("userId", user.userId);
+    sessionStorage.setItem("userName", user.name);
     location.href = 'home_signed_in.html';
 
 }
@@ -304,6 +307,10 @@ function signOut() {
     sessionStorage.removeItem("userId")
     location.href = 'home.html';
 
+}
+
+function welcomeUser(){
+    document.getElementById("userName").innerText = sessionStorage.getItem("userName");
 }
 
 
@@ -481,53 +488,3 @@ const clickRemoveEvent = (e) => {
 }
 
 
-
-
-
-// const clickGetallUsers = () => {
-//     makeRequest("GET", HOSTURL + `/Users/getAllUsers`)
-//         .then((resolve) => { getAllUsers(resolve) })
-//         .catch(function (error) { console.log(error.message) })
-
-//     return false;
-// }
-
-// function getAllUsers(input) {
-
-//     let allUsers = JSON.parse(input);
-
-//     while (document.getElementById("usersTable").rows.length > 1) {
-//         document.getElementById("usersTable").deleteRow(1);
-//     }
-
-//     for (let i = 0; i < allUsers.length; i++) {
-
-//         let newRow = document.createElement('TR');
-
-//         newRow.id = "row" + allUsers[i].userId;
-
-//         document.getElementById("usersTable").appendChild(newRow);
-
-//         let td1 = document.createElement('TD');
-//         document.getElementById("row" + allUsers[i].userId).appendChild(td1);
-//         td1.innerText = allUsers[i].name;
-
-//         let td2 = document.createElement('TD');
-//         document.getElementById("row" + allUsers[i].userId).appendChild(td2);
-//         td2.innerText = allUsers[i].email;
-
-//         let td3 = document.createElement('TD');
-//         document.getElementById("row" + allUsers[i].userId).appendChild(td3);
-
-//         for (let x = 0; x < allUsers[i].decks.length; x++) {
-//             let newLink = document.createElement('a');
-//             newLink.style = "color:Red;text-decoration:underline;cursor:pointer";
-//             newLink.id = allUsers[i].decks[x].deckId;
-//             newLink.innerText = allUsers[i].decks[x].name + " ";
-//             newLink.onclick = deckDetails;
-//             td3.appendChild(newLink);
-//         }
-
-//     }
-
-// }
