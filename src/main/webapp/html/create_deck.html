@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-sm">
         <a class="navbar-brand" id="Title">TopDeck</a>
 
         <ul class="navbar-nav">
@@ -60,26 +60,25 @@
     </nav>
 
     <br>
-    <div class="container mainBox">
+    <div class="container makeDeckBox">
         <br>
-        <div class="container">
+        <div class="container formBlock">
 
             <h1>New Deck</h1>
 
-            <button onclick="return createNewDeck()">Create Deck</button>
-
-
-            <p>Name:
+            <p>
                 <input id="deckName" type="text" placeholder="Name" required>
             </p>
 
-            <p>Format:
+            <p>
                 <input id="deckFormat" type="text" placeholder="Format" required>
             </p>
 
-            <p>Cards:
+            <p>
                 <textarea id="deckCards" placeholder="Cards" name="text" rows="100" cols="1" wrap="soft" style="overflow:hidden; resize:none;"></textarea>
             </p>
+
+            <button onclick="return createNewDeck()">Create Deck</button>
 
         </div>
     </div>

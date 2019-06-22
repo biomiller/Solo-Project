@@ -47,13 +47,28 @@ function getUserDecks(input) {
 
     for (let x = 0; x < user.decks.length; x++) {
 
-        let newDeck = document.createElement('div');
-        newDeck.innerText = user.decks[x].name;
-        newDeck.style = "background-color: Black;color: white;padding: 18px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px;active;collapsible:hover {background-color: #555;}"
-        document.getElementById("decks").appendChild(newDeck);
+        let newDeckHead = document.createElement('div');
+        newDeckHead.innerText = user.decks[x].name + " Format: " +  user.decks[x].format;
+        newDeckHead.id = user.decks[x].deckId + "Head";
+        newDeckHead.style = "display: inline-block; background-color: Black;color: white; padding: 5px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px; height: 35px;"
+        document.getElementById("decks").appendChild(newDeckHead);
+
+        let newDeckDelete = document.createElement('p');
+        newDeckDelete.innerText = "Delete";
+        newDeckDelete.id = user.decks[x].deckId + "delete";
+        newDeckDelete.style = "display: inline-block; cursor: pointer;background-color: saddlebrown;color: antiquewhite;margin-left: 50%;margin-right: 10px;padding: 2px;width: 10%;border: none;text-align: center;outline: none;font-size: 15px;border-radius: 5px;";
+        newDeckDelete.onclick = clickDeleteDeck;
+        document.getElementById(user.decks[x].deckId + "Head").appendChild(newDeckDelete);
+        
+        let newDeckUpdate = document.createElement('p');
+        newDeckUpdate.innerText = "Update";
+        newDeckUpdate.id = user.decks[x].deckId + "update";
+        newDeckUpdate.style = "display: inline-block; cursor: pointer; background-color: saddlebrown;color: antiquewhite;margin-left: 10px;padding: 2px;width: 10%;border: none;text-align: center;outline: none;font-size: 15px;border-radius: 5px";
+        newDeckUpdate.onclick = clickUpdateDeck;
+        document.getElementById(user.decks[x].deckId + "Head").appendChild(newDeckUpdate);
 
         let newDeckDiv = document.createElement('div');
-        newDeckDiv.style = "border-style: solid; border-color: black; padding: 20px;";
+        newDeckDiv.style = "border-style: solid; border-color: black; padding: 20px;margin-bottom:10px;";
         newDeckDiv.id = user.decks[x].deckId + "Div";
         document.getElementById("decks").appendChild(newDeckDiv);
 
@@ -69,23 +84,6 @@ function getUserDecks(input) {
         document.getElementById(user.decks[x].deckId + "Div").appendChild(newDeckDetails);
 
         document.getElementById(user.decks[x].deckId + "Div").appendChild(document.createElement('br'));
-
-
-        let newDeckDelete = document.createElement('p');
-        newDeckDelete.innerText = "Delete";
-        newDeckDelete.id = user.decks[x].deckId + "delete";
-        newDeckDelete.style = "cursor: pointer;background-color: #777;color: white;padding: 5px;width: 25%;border: none;text-align: left;outline: none;font-size: 15px;";
-        newDeckDelete.onclick = clickDeleteDeck;
-        document.getElementById(user.decks[x].deckId + "Details").appendChild(newDeckDelete);
-
-
-        let newDeckUpdate = document.createElement('p');
-        newDeckUpdate.innerText = "Update";
-        newDeckUpdate.id = user.decks[x].deckId + "update";
-        newDeckUpdate.style = "cursor: pointer; background-color: #777;color: white;padding: 5px;width: 25%;border: none;text-align: left;outline: none;font-size: 15px;";
-        newDeckUpdate.onclick = clickUpdateDeck;
-        document.getElementById(user.decks[x].deckId + "Details").appendChild(newDeckUpdate);
-
 
     }
 }
@@ -271,6 +269,7 @@ function fillUserFields() {
 }
 
 
+
 function clickGetDeck() {
     makeRequest("GET", HOSTURL + `/Decks/getDeck/${sessionStorage.getItem('deckId')}`)
         .then((resolve) => { parseStoreDeck(resolve) })
@@ -327,12 +326,12 @@ function getAllDecks(input) {
     for (let x = 0; x < allDecks.length; x++) {
 
         let newDeck = document.createElement('div');
-        newDeck.innerText = allDecks[x].name;
-        newDeck.style = "background-color: Black;color: white;padding: 18px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px;active;collapsible:hover {background-color: #555;}"
+        newDeck.innerText = allDecks[x].name + " Format: " + allDecks[x].format;
+        newDeck.style = "display: inline-block; background-color: Black;color: white; padding: 5px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px; height: 35px;"
         document.getElementById("decks").appendChild(newDeck);
 
         let newDeckDiv = document.createElement('div');
-        newDeckDiv.style = "border-style: solid; border-color: black; padding: 25px;";
+        newDeckDiv.style = "border-style: solid; border-color: black; padding: 25px;margin-bottom:10px;";
         newDeckDiv.id = allDecks[x].deckId + "Div";
         document.getElementById("decks").appendChild(newDeckDiv);
 
@@ -369,13 +368,22 @@ function getAllEvents(input) {
 
     for (let x = 0; x < AllEvents.length; x++) {
 
-        let newEvent = document.createElement('p');
-        newEvent.innerText = AllEvents[x].name;
-        newEvent.style = "background-color: Black;color: white;padding: 18px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px;active;collapsible:hover {background-color: #555;}"
-        document.getElementById("events").appendChild(newEvent);
+        let newEventHead = document.createElement('div');
+        newEventHead.innerText = AllEvents[x].name;
+        newEventHead.id = AllEvents[x].eventId + "Head";
+        newEventHead.style = "display: inline-block; background-color: Black;color: white; padding: 5px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px; height: 35px;"
+        document.getElementById("events").appendChild(newEventHead);
+
+        let newEventStar = document.createElement('p');
+        newEventStar.innerText = "Star";
+        newEventStar.id = AllEvents[x].eventId + "star";
+        newEventStar.style = "display: inline-block; cursor: pointer;background-color: saddlebrown;color: antiquewhite;margin-left: 55%;margin-right: 10px;padding: 2px;width: 10%;border: none;text-align: center;outline: none;font-size: 15px;border-radius: 5px;";
+        newEventStar.onclick = clickStarEvent;
+        document.getElementById(AllEvents[x].eventId + "Head").appendChild(newEventStar);
 
         let newEventDiv = document.createElement('div');
         newEventDiv.class = "content";
+        newEventDiv.style = "border-style: solid; border-color: black; padding: 5px;margin-bottom:15px;";
         newEventDiv.id = AllEvents[x].eventId + "Div";
         document.getElementById("events").appendChild(newEventDiv);
 
@@ -391,15 +399,7 @@ function getAllEvents(input) {
         newEventDate.innerText = "Date: " + AllEvents[x].eventDate;
         document.getElementById(AllEvents[x].eventId + "Div").appendChild(newEventDate);
 
-        let newEventStar = document.createElement('p');
-        newEventStar.innerText = "Star";
-        newEventStar.id = AllEvents[x].eventId + "star";
-        newEventStar.style = "cursor: pointer;background-color: #777;color: white;padding: 5px;width: 25%;border: none;text-align: left;outline: none;font-size: 15px;";
-        newEventStar.onclick = clickStarEvent;
-        document.getElementById(AllEvents[x].eventId + "Div").appendChild(newEventStar);
 
-        document.getElementById(AllEvents[x].eventId + "Div").appendChild(document.createElement('br'));
-        document.getElementById(AllEvents[x].eventId + "Div").appendChild(document.createElement('br'));
 
     }
 }
@@ -433,13 +433,22 @@ function getUserEvents(input) {
 
     for (let x = 0; x < user.events.length; x++) {
 
-        let newEvent = document.createElement('p');
-        newEvent.innerText = user.events[x].name;
-        newEvent.style = "background-color: Black;color: white;padding: 18px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px;active;collapsible:hover {background-color: #555;}"
-        document.getElementById("events").appendChild(newEvent);
+        let newEventHead = document.createElement('div');
+        newEventHead.innerText = user.events[x].name;
+        newEventHead.id = user.events[x].eventId + "Head";
+        newEventHead.style = "display: inline-block; background-color: Black;color: white; padding: 5px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px; height: 35px;"
+        document.getElementById("events").appendChild(newEventHead);
+
+        let newEventRemove = document.createElement('p');
+        newEventRemove.innerText = "Remove";
+        newEventRemove.id = user.events[x].eventId + "remove";
+        newEventRemove.style = "display: inline-block; cursor: pointer;background-color: saddlebrown;color: antiquewhite;margin-left: 55%;margin-right: 10px;padding: 2px;width: 10%;border: none;text-align: center;outline: none;font-size: 15px;border-radius: 5px;";
+        newEventRemove.onclick = clickRemoveEvent;
+        document.getElementById(user.events[x].eventId + "Head").appendChild(newEventRemove);
 
         let newEventDiv = document.createElement('div');
         newEventDiv.class = "content";
+        newEventDiv.style = "border-style: solid; border-color: black; padding: 5px;margin-bottom:15px;";
         newEventDiv.id = user.events[x].eventId + "Div";
         document.getElementById("events").appendChild(newEventDiv);
 
@@ -455,14 +464,6 @@ function getUserEvents(input) {
         newEventDate.innerText = "Date: " + user.events[x].eventDate;
         document.getElementById(user.events[x].eventId + "Div").appendChild(newEventDate);
 
-        let newEventRemove = document.createElement('p');
-        newEventRemove.innerText = "Remove";
-        newEventRemove.id = user.events[x].eventId + "remove";
-        newEventRemove.style = "cursor: pointer;background-color: #777;color: white;padding: 5px;width: 25%;border: none;text-align: left;outline: none;font-size: 15px;";
-        newEventRemove.onclick = clickRemoveEvent;
-        document.getElementById(user.events[x].eventId + "Div").appendChild(newEventRemove);
-
-        document.getElementById(user.events[x].eventId + "Div").appendChild(document.createElement('br'));
         document.getElementById(user.events[x].eventId + "Div").appendChild(document.createElement('br'));
 
     }

@@ -21,7 +21,7 @@
 </head>
 
 <body onload="fillDeckFields()">
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-sm">
         <a class="navbar-brand" id="Title">TopDeck</a>
 
         <ul class="navbar-nav">
@@ -60,18 +60,21 @@
             
         </ul>
     </nav>
+    <div class="container makeDeckBox">
+        <br>
+        <div class="container formBlock">
 
-    <h1>Update Deck</h1>
+            <h1>Update Deck</h1>
 
-        <p>Name:
+        <p>
             <input id="deckName" type="text" required>
         </p>
 
-        <p>Format:
+        <p>
             <input id="deckFormat" type="text" required>
         </p>
 
-        <p>Cards:
+        <p>
             <textarea id="deckCards" name="text" rows="100" cols="1" wrap="soft"
                 style="overflow:hidden; resize:none;"></textarea>
         </p>

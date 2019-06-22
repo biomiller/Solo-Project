@@ -3,20 +3,62 @@ body {
 }
 
 .navbar{
-    background-color: black;
+    background-color: sienna;
+}
+.navbar li a{
+    color: antiquewhite;
 }
 
+.dropdown-item{
+    background-color: saddlebrown;
+}
+
+.dropdown-menu{
+    padding:0px;
+}
+
+
 .mainBox{
+    background-color: antiquewhite;
+    opacity: 0.95;
+    min-height: 300px;
+    height: auto !important;
+    border-radius: 25px;
+    padding-bottom: 15px;
+}
+
+.makeDeckBox{
     background-color: antiquewhite;
     min-height: 950px;
     height: auto !important;
     height: 950px;
+    width:450px;
+    border-radius: 25px;
+    padding-bottom: 15px;
+}
+
+.formBlock{
+    display: block;
+    text-align: center;
+}
+
+#profileBox{
+    background-color: antiquewhite;
+    opacity: 0.95;
+    min-height: 300px;
+    height: auto !important;
+    height: 300px;
+    width: 300px;
     border-radius: 25px;
     padding-bottom: 15px;
 }
 
 #Title{
-    color: White;
+    color: antiquewhite;
+}
+
+#updateProfile{
+    display: inline-block;
 }
 
 
