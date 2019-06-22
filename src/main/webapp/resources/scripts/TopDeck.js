@@ -182,13 +182,14 @@ function createNewUser() {
 
     let password = document.getElementById("userPassword").value;
 
+
     newUserObj.password = password;
 
     let newUserJSON = JSON.stringify(newUserObj);
 
     makeRequest("POST", HOSTURL + `/Users/createUser`, newUserJSON)
         .then((resolve) => {
-            makeRequest("GET", HOSTURL + `/Users/getUserByEmail/${sessionStorage.getItem("loginEmail")}`)
+            makeRequest("GET", HOSTURL + `/Users/getUserByEmail/${sessionStorage.getItem("loginEmail")}/${document.getElementById("userPassword").value}`)
                 .then((resolve) => { signIn(resolve) })
         })
         .catch(function (error) {
