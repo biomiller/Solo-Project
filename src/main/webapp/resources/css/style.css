@@ -52,6 +52,19 @@ body {
     text-align: center;
 }
 
+.brownButton{
+    display: inline-block; 
+    cursor: pointer;
+    background-color: saddlebrown;
+    color: antiquewhite;
+    padding: 2px;
+    border: none;
+    text-align: center;
+    outline: none;
+    font-size: 15px;
+    border-radius: 5px;
+}
+
 #profileBox{
     background-color: antiquewhite;
     opacity: 0.95;

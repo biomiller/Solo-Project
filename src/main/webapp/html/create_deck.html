@@ -64,6 +64,7 @@
         <br>
         <div class="container formBlock">
 
+            <form onsubmit="return createNewDeck()">
             <h1>New Deck</h1>
 
             <p>
@@ -75,11 +76,11 @@
             </p>
 
             <p>
-                <textarea id="deckCards" placeholder="Cards" name="text" rows="100" cols="1" wrap="soft" style="overflow:hidden; resize:none;"></textarea>
+                <textarea id="deckCards" required placeholder="Cards" name="text" rows="100" cols="1" wrap="soft" style="overflow:hidden; resize:none;"></textarea>
             </p>
 
-            <button onclick="return createNewDeck()">Create Deck</button>
-
+            <button class="brownButton" type="submit" >Create Deck</button>
+        </form>
         </div>
     </div>
 
