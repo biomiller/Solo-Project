@@ -1,9 +1,87 @@
-.deckDetailsLink{
-    color: Green;
+body {
+    background-image: url("../wood_decking.jpg");
+}
+
+.navbar{
+    background-color: sienna;
+}
+.navbar li a{
+    color: antiquewhite;
+}
+
+.dropdown-item{
+    background-color: saddlebrown;
+}
+
+.dropdown-menu{
+    padding:0px;
+}
+
+
+.mainBox{
+    background-color: antiquewhite;
+    opacity: 0.95;
+    min-height: 300px;
+    height: auto !important;
+    border-radius: 25px;
+    padding-bottom: 15px;
+}
+
+.welcomeBox{
+    background-color: antiquewhite;
+    opacity: 0.95;
+    min-height: 300px;
+    height: auto !important;
+    border-radius: 25px;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+.makeDeckBox{
+    background-color: antiquewhite;
+    min-height: 950px;
+    height: auto !important;
+    height: 950px;
+    width:450px;
+    border-radius: 25px;
+    padding-bottom: 15px;
+}
+
+.formBlock{
+    display: block;
+    text-align: center;
+}
+
+.brownButton{
+    display: inline-block; 
+    cursor: pointer;
+    background-color: saddlebrown;
+    color: antiquewhite;
+    padding: 2px;
+    border: none;
+    text-align: center;
+    outline: none;
+    font-size: 15px;
+    border-radius: 5px;
+}
+
+#profileBox{
+    background-color: antiquewhite;
+    opacity: 0.95;
+    min-height: 300px;
+    height: auto !important;
+    height: 300px;
+    width: 300px;
+    border-radius: 25px;
+    padding-bottom: 15px;
 }
 
 #Title{
-    color: White;
+    color: antiquewhite;
+}
+
+#updateProfile{
+    display: inline-block;
 }
 
 

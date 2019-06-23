@@ -3,8 +3,6 @@ package com.bae.persistence.repository;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -18,7 +16,6 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.bae.persistence.domain.Deck;
-import com.bae.persistence.domain.User;
 import com.bae.util.Constants;
 import com.bae.util.JSONUtil;
 

@@ -3,8 +3,6 @@ package com.bae.persistence.repository;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -17,9 +15,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.bae.persistence.domain.Deck;
 import com.bae.persistence.domain.Event;
-import com.bae.persistence.domain.User;
 import com.bae.util.Constants;
 import com.bae.util.JSONUtil;
 
@@ -108,8 +104,6 @@ public class EventDBRepositoryTest {
 	@Test
 	public void testUpdateUserNotExist() {
 		
-		Event event = new Event("M19 Prerelease", "limited", "Rogue Gaming", "2018-07-09");
-
 		Event compEvent = new Event("WAR Draft", "Sealed", "Dark Sphere", "2018-07-11");
 
 		Mockito.when(manager.find(Event.class, 6)).thenReturn(null);

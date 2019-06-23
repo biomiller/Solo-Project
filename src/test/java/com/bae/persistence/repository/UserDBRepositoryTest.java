@@ -162,8 +162,6 @@ public class UserDBRepositoryTest {
 		Event event = new Event();
 		events.add(event);
 
-		User user = new User("Owen", "dummyemail@gmail.com", "password", decks, events);
-
 		User compUser = new User("Dave", "fakeemail@gmail.com", "login", decks, events);
 
 		Mockito.when(manager.find(User.class, 2)).thenReturn(null);

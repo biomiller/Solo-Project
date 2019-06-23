@@ -10,7 +10,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.bae.persistence.domain.User;
+
 import com.bae.persistence.repository.UserDBRepository;
 import com.bae.util.Constants;
 import com.bae.util.JSONUtil;

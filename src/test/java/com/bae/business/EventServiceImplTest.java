@@ -2,9 +2,6 @@ package com.bae.business;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
-
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -12,11 +9,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.bae.persistence.domain.Event;
 import com.bae.persistence.repository.EventDBRepository;
-import com.bae.persistence.repository.UserDBRepository;
 import com.bae.util.Constants;
-import com.bae.util.JSONUtil;
 
 @RunWith(MockitoJUnitRunner.class)
 
@@ -29,9 +23,6 @@ public class EventServiceImplTest {
 	private EventDBRepository repo;
 	
 
-	@Before
-	public void setup() {
-	}
 	
 	@Test
 	public void getAllEventsTest() {

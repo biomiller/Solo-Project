@@ -1,9 +1,9 @@
 
 let path = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
 
-//const HOSTURL = `http://localhost:8080/TopDeck/api`;
+const HOSTURL = `http://localhost:8080/TopDeck/api`;
 //const HOSTURL = `http://35.189.85.82:8888/TopDeck/api`;
-const HOSTURL = path + "/TopDeck/api";
+//const HOSTURL = path + "/TopDeck/api";
 
 function makeRequest(method, url, body) {
 
@@ -47,13 +47,28 @@ function getUserDecks(input) {
 
     for (let x = 0; x < user.decks.length; x++) {
 
-        let newDeck = document.createElement('p');
-        newDeck.innerText = user.decks[x].name;
-        newDeck.style = "background-color: Black;color: white;padding: 18px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px;active;collapsible:hover {background-color: #555;}"
-        document.getElementById("decks").appendChild(newDeck);
+        let newDeckHead = document.createElement('div');
+        newDeckHead.innerText = user.decks[x].name + " Format: " +  user.decks[x].format;
+        newDeckHead.id = user.decks[x].deckId + "Head";
+        newDeckHead.style = "display: inline-block; background-color: Black;color: white; padding: 5px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px; height: 35px;"
+        document.getElementById("decks").appendChild(newDeckHead);
+
+        let newDeckDelete = document.createElement('p');
+        newDeckDelete.innerText = "Delete";
+        newDeckDelete.id = user.decks[x].deckId + "delete";
+        newDeckDelete.style = "display: inline-block; cursor: pointer;background-color: saddlebrown;color: antiquewhite;margin-left: 50%;margin-right: 10px;padding: 2px;width: 10%;border: none;text-align: center;outline: none;font-size: 15px;border-radius: 5px;";
+        newDeckDelete.onclick = clickDeleteDeck;
+        document.getElementById(user.decks[x].deckId + "Head").appendChild(newDeckDelete);
+        
+        let newDeckUpdate = document.createElement('p');
+        newDeckUpdate.innerText = "Update";
+        newDeckUpdate.id = user.decks[x].deckId + "update";
+        newDeckUpdate.style = "display: inline-block; cursor: pointer; background-color: saddlebrown;color: antiquewhite;margin-left: 10px;padding: 2px;width: 10%;border: none;text-align: center;outline: none;font-size: 15px;border-radius: 5px";
+        newDeckUpdate.onclick = clickUpdateDeck;
+        document.getElementById(user.decks[x].deckId + "Head").appendChild(newDeckUpdate);
 
         let newDeckDiv = document.createElement('div');
-        newDeckDiv.class = "content";
+        newDeckDiv.style = "border-style: solid; border-color: black; padding: 20px;margin-bottom:10px;";
         newDeckDiv.id = user.decks[x].deckId + "Div";
         document.getElementById("decks").appendChild(newDeckDiv);
 
@@ -69,24 +84,6 @@ function getUserDecks(input) {
         document.getElementById(user.decks[x].deckId + "Div").appendChild(newDeckDetails);
 
         document.getElementById(user.decks[x].deckId + "Div").appendChild(document.createElement('br'));
-        document.getElementById(user.decks[x].deckId + "Div").appendChild(document.createElement('br'));
-
-
-        let newDeckDelete = document.createElement('p');
-        newDeckDelete.innerText = "Delete";
-        newDeckDelete.id = user.decks[x].deckId + "delete";
-        newDeckDelete.style = "cursor: pointer;background-color: #777;color: white;padding: 5px;width: 25%;border: none;text-align: left;outline: none;font-size: 15px;";
-        newDeckDelete.onclick = clickDeleteDeck;
-        document.getElementById(user.decks[x].deckId + "Details").appendChild(newDeckDelete);
-
-
-        let newDeckUpdate = document.createElement('p');
-        newDeckUpdate.innerText = "Update";
-        newDeckUpdate.id = user.decks[x].deckId + "update";
-        newDeckUpdate.style = "cursor: pointer; background-color: #777;color: white;padding: 5px;width: 25%;border: none;text-align: left;outline: none;font-size: 15px;";
-        newDeckUpdate.onclick = clickUpdateDeck;
-        document.getElementById(user.decks[x].deckId + "Details").appendChild(newDeckUpdate);
-
 
     }
 }
@@ -141,6 +138,7 @@ const updateDeck = () => {
         .then((resolve) => { location.href = 'user_decks.html' })
         .catch(function (error) { console.log(error.message) })
 
+    return false;
 }
 
 function createNewDeck() {
@@ -185,13 +183,14 @@ function createNewUser() {
 
     let password = document.getElementById("userPassword").value;
 
+
     newUserObj.password = password;
 
     let newUserJSON = JSON.stringify(newUserObj);
 
     makeRequest("POST", HOSTURL + `/Users/createUser`, newUserJSON)
         .then((resolve) => {
-            makeRequest("GET", HOSTURL + `/Users/getUserByEmail/${sessionStorage.getItem("loginEmail")}`)
+            makeRequest("GET", HOSTURL + `/Users/getUserByEmail/${sessionStorage.getItem("loginEmail")}/${document.getElementById("userPassword").value}`)
                 .then((resolve) => { signIn(resolve) })
         })
         .catch(function (error) {
@@ -208,6 +207,8 @@ function updateUser() {
     let newUserObj = {};
 
     let name = document.getElementById("userName").value;
+    
+    sessionStorage.setItem("userName", name);
 
     newUserObj.name = name;
 
@@ -272,6 +273,7 @@ function fillUserFields() {
 }
 
 
+
 function clickGetDeck() {
     makeRequest("GET", HOSTURL + `/Decks/getDeck/${sessionStorage.getItem('deckId')}`)
         .then((resolve) => { parseStoreDeck(resolve) })
@@ -298,6 +300,7 @@ function signIn(input) {
     sessionStorage.setItem("user", input);
     let user = JSON.parse(input);
     sessionStorage.setItem("userId", user.userId);
+    sessionStorage.setItem("userName", user.name);
     location.href = 'home_signed_in.html';
 
 }
@@ -306,6 +309,10 @@ function signOut() {
     sessionStorage.removeItem("userId")
     location.href = 'home.html';
 
+}
+
+function welcomeUser(){
+    document.getElementById("userName").innerText = sessionStorage.getItem("userName");
 }
 
 
@@ -327,13 +334,13 @@ function getAllDecks(input) {
 
     for (let x = 0; x < allDecks.length; x++) {
 
-        let newDeck = document.createElement('p');
-        newDeck.innerText = allDecks[x].name;
-        newDeck.style = "background-color: Black;color: white;padding: 18px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px;active;collapsible:hover {background-color: #555;}"
+        let newDeck = document.createElement('div');
+        newDeck.innerText = allDecks[x].name + " Format: " + allDecks[x].format;
+        newDeck.style = "display: inline-block; background-color: Black;color: white; padding: 5px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px; height: 35px;"
         document.getElementById("decks").appendChild(newDeck);
 
         let newDeckDiv = document.createElement('div');
-        newDeckDiv.class = "content";
+        newDeckDiv.style = "border-style: solid; border-color: black; padding: 25px;margin-bottom:10px;";
         newDeckDiv.id = allDecks[x].deckId + "Div";
         document.getElementById("decks").appendChild(newDeckDiv);
 
@@ -341,15 +348,13 @@ function getAllDecks(input) {
 
         let cards = allDecks[x].cards;
         let formatedCards = cards.split(",").join("\n");
+        
         newDeckDetails.innerText = formatedCards;
-
         newDeckDetails.class = "columns";
-        newDeckDetails.style = "column-count: 4;";
+        newDeckDetails.style = "column-count: 3;";
         newDeckDetails.id = allDecks[x].deckId + "Details";
         document.getElementById(allDecks[x].deckId + "Div").appendChild(newDeckDetails);
 
-        document.getElementById(allDecks[x].deckId + "Div").appendChild(document.createElement('br'));
-        document.getElementById(allDecks[x].deckId + "Div").appendChild(document.createElement('br'));
 
     }
 }
@@ -372,13 +377,22 @@ function getAllEvents(input) {
 
     for (let x = 0; x < AllEvents.length; x++) {
 
-        let newEvent = document.createElement('p');
-        newEvent.innerText = AllEvents[x].name;
-        newEvent.style = "background-color: Black;color: white;padding: 18px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px;active;collapsible:hover {background-color: #555;}"
-        document.getElementById("events").appendChild(newEvent);
+        let newEventHead = document.createElement('div');
+        newEventHead.innerText = AllEvents[x].name;
+        newEventHead.id = AllEvents[x].eventId + "Head";
+        newEventHead.style = "display: inline-block; background-color: Black;color: white; padding: 5px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px; height: 35px;"
+        document.getElementById("events").appendChild(newEventHead);
+
+        let newEventStar = document.createElement('p');
+        newEventStar.innerText = "Star";
+        newEventStar.id = AllEvents[x].eventId + "star";
+        newEventStar.style = "display: inline-block; cursor: pointer;background-color: saddlebrown;color: antiquewhite;margin-left: 55%;margin-right: 10px;padding: 2px;width: 10%;border: none;text-align: center;outline: none;font-size: 15px;border-radius: 5px;";
+        newEventStar.onclick = clickStarEvent;
+        document.getElementById(AllEvents[x].eventId + "Head").appendChild(newEventStar);
 
         let newEventDiv = document.createElement('div');
         newEventDiv.class = "content";
+        newEventDiv.style = "border-style: solid; border-color: black; padding: 5px;margin-bottom:15px;";
         newEventDiv.id = AllEvents[x].eventId + "Div";
         document.getElementById("events").appendChild(newEventDiv);
 
@@ -394,15 +408,7 @@ function getAllEvents(input) {
         newEventDate.innerText = "Date: " + AllEvents[x].eventDate;
         document.getElementById(AllEvents[x].eventId + "Div").appendChild(newEventDate);
 
-        let newEventStar = document.createElement('p');
-        newEventStar.innerText = "Star";
-        newEventStar.id = AllEvents[x].eventId + "star";
-        newEventStar.style = "cursor: pointer;background-color: #777;color: white;padding: 5px;width: 25%;border: none;text-align: left;outline: none;font-size: 15px;";
-        newEventStar.onclick = clickStarEvent;
-        document.getElementById(AllEvents[x].eventId + "Div").appendChild(newEventStar);
 
-        document.getElementById(AllEvents[x].eventId + "Div").appendChild(document.createElement('br'));
-        document.getElementById(AllEvents[x].eventId + "Div").appendChild(document.createElement('br'));
 
     }
 }
@@ -436,13 +442,22 @@ function getUserEvents(input) {
 
     for (let x = 0; x < user.events.length; x++) {
 
-        let newEvent = document.createElement('p');
-        newEvent.innerText = user.events[x].name;
-        newEvent.style = "background-color: Black;color: white;padding: 18px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px;active;collapsible:hover {background-color: #555;}"
-        document.getElementById("events").appendChild(newEvent);
+        let newEventHead = document.createElement('div');
+        newEventHead.innerText = user.events[x].name;
+        newEventHead.id = user.events[x].eventId + "Head";
+        newEventHead.style = "display: inline-block; background-color: Black;color: white; padding: 5px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px; height: 35px;"
+        document.getElementById("events").appendChild(newEventHead);
+
+        let newEventRemove = document.createElement('p');
+        newEventRemove.innerText = "Remove";
+        newEventRemove.id = user.events[x].eventId + "remove";
+        newEventRemove.style = "display: inline-block; cursor: pointer;background-color: saddlebrown;color: antiquewhite;margin-left: 55%;margin-right: 10px;padding: 2px;width: 10%;border: none;text-align: center;outline: none;font-size: 15px;border-radius: 5px;";
+        newEventRemove.onclick = clickRemoveEvent;
+        document.getElementById(user.events[x].eventId + "Head").appendChild(newEventRemove);
 
         let newEventDiv = document.createElement('div');
         newEventDiv.class = "content";
+        newEventDiv.style = "border-style: solid; border-color: black; padding: 5px;margin-bottom:15px;";
         newEventDiv.id = user.events[x].eventId + "Div";
         document.getElementById("events").appendChild(newEventDiv);
 
@@ -458,14 +473,6 @@ function getUserEvents(input) {
         newEventDate.innerText = "Date: " + user.events[x].eventDate;
         document.getElementById(user.events[x].eventId + "Div").appendChild(newEventDate);
 
-        let newEventRemove = document.createElement('p');
-        newEventRemove.innerText = "Remove";
-        newEventRemove.id = user.events[x].eventId + "remove";
-        newEventRemove.style = "cursor: pointer;background-color: #777;color: white;padding: 5px;width: 25%;border: none;text-align: left;outline: none;font-size: 15px;";
-        newEventRemove.onclick = clickRemoveEvent;
-        document.getElementById(user.events[x].eventId + "Div").appendChild(newEventRemove);
-
-        document.getElementById(user.events[x].eventId + "Div").appendChild(document.createElement('br'));
         document.getElementById(user.events[x].eventId + "Div").appendChild(document.createElement('br'));
 
     }
@@ -483,53 +490,3 @@ const clickRemoveEvent = (e) => {
 }
 
 
-
-
-
-// const clickGetallUsers = () => {
-//     makeRequest("GET", HOSTURL + `/Users/getAllUsers`)
-//         .then((resolve) => { getAllUsers(resolve) })
-//         .catch(function (error) { console.log(error.message) })
-
-//     return false;
-// }
-
-// function getAllUsers(input) {
-
-//     let allUsers = JSON.parse(input);
-
-//     while (document.getElementById("usersTable").rows.length > 1) {
-//         document.getElementById("usersTable").deleteRow(1);
-//     }
-
-//     for (let i = 0; i < allUsers.length; i++) {
-
-//         let newRow = document.createElement('TR');
-
-//         newRow.id = "row" + allUsers[i].userId;
-
-//         document.getElementById("usersTable").appendChild(newRow);
-
-//         let td1 = document.createElement('TD');
-//         document.getElementById("row" + allUsers[i].userId).appendChild(td1);
-//         td1.innerText = allUsers[i].name;
-
-//         let td2 = document.createElement('TD');
-//         document.getElementById("row" + allUsers[i].userId).appendChild(td2);
-//         td2.innerText = allUsers[i].email;
-
-//         let td3 = document.createElement('TD');
-//         document.getElementById("row" + allUsers[i].userId).appendChild(td3);
-
-//         for (let x = 0; x < allUsers[i].decks.length; x++) {
-//             let newLink = document.createElement('a');
-//             newLink.style = "color:Red;text-decoration:underline;cursor:pointer";
-//             newLink.id = allUsers[i].decks[x].deckId;
-//             newLink.innerText = allUsers[i].decks[x].name + " ";
-//             newLink.onclick = deckDetails;
-//             td3.appendChild(newLink);
-//         }
-
-//     }
-
-// }
