@@ -1,9 +1,9 @@
 
 let path = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
 
-const HOSTURL = `http://localhost:8080/TopDeck/api`;
+//const HOSTURL = `http://localhost:8080/TopDeck/api`;
 //const HOSTURL = `http://35.189.85.82:8888/TopDeck/api`;
-//const HOSTURL = path + "/TopDeck/api";
+const HOSTURL = path + "/TopDeck/api";
 
 function makeRequest(method, url, body) {
 
