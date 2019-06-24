@@ -105,10 +105,13 @@ const clickUpdateDeck = (e) => {
     sessionStorage.setItem("deckId", deckId);
 
     makeRequest("GET", HOSTURL + `/Decks/getDeck/${deckId}`)
-        .then((resolve) => { sessionStorage.setItem("deck", resolve)  })
-        .catch(function (error) { console.log(error.message) })
+        .then((resolve) => { 
+            sessionStorage.setItem("deck", resolve);
+            location.href = 'update_deck.html'; 
+        })
+        .catch(function (error) { console.log(error.message) });
 
-    location.href = 'update_deck.html';
+    //location.href = 'update_deck.html';
 
     return false;
 }
