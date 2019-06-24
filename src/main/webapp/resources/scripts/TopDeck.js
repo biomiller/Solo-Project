@@ -251,7 +251,7 @@ function deleteUser() {
 
 function fillDeckFields() {
 
-    makeRequest("GET", HOSTURL + `/Decks/getDeck/${sessionStorage.getItem("deck")}`)
+    makeRequest("GET", HOSTURL + `/Decks/getDeck/${sessionStorage.getItem("deckId")}`)
         .then((resolve) => { sessionStorage.setItem("deck", resolve)  })
         .catch(function (error) { console.log(error.message) })
     
