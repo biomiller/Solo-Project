@@ -110,6 +110,7 @@ const clickUpdateDeck = (e) => {
 
     location.href = 'update_deck.html';
 
+    return false;
 }
 
 const updateDeck = () => {
@@ -251,10 +252,6 @@ function deleteUser() {
 
 function fillDeckFields() {
 
-    makeRequest("GET", HOSTURL + `/Decks/getDeck/${sessionStorage.getItem("deckId")}`)
-        .then((resolve) => { sessionStorage.setItem("deck", resolve)  })
-        .catch(function (error) { console.log(error.message) })
-    
     let deck = sessionStorage.getItem("deck");
 
     let deckObj = JSON.parse(deck);
