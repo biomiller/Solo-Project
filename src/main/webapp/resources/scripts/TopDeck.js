@@ -111,8 +111,6 @@ const clickUpdateDeck = (e) => {
         })
         .catch(function (error) { console.log(error.message) });
 
-    //location.href = 'update_deck.html';
-
     return false;
 }
 
