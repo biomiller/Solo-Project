@@ -105,7 +105,7 @@ const clickUpdateDeck = (e) => {
     sessionStorage.setItem("deckId", deckId);
 
     makeRequest("GET", HOSTURL + `/Decks/getDeck/${deckId}`)
-        .then((resolve) => { sessionStorage.setItem('deck', resolve)  })
+        .then((resolve) => { sessionStorage.setItem("deck", resolve)  })
         .catch(function (error) { console.log(error.message) })
 
     location.href = 'update_deck.html';
@@ -250,6 +250,11 @@ function deleteUser() {
 
 
 function fillDeckFields() {
+
+    makeRequest("GET", HOSTURL + `/Decks/getDeck/${deckId}`)
+        .then((resolve) => { sessionStorage.setItem("deck", resolve)  })
+        .catch(function (error) { console.log(error.message) })
+    
     let deck = sessionStorage.getItem("deck");
 
     let deckObj = JSON.parse(deck);
