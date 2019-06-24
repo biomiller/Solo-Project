@@ -17,6 +17,6 @@ https://github.com/Matt25969/jenkinsSetup.git
 SonarQube:
 https://github.com/Matt25969/SonarDeployment.git
 
-TopDeck was tested and run on a Google Cloud Platform Linux Ubuntu 18.04 virtual machine.
+TopDeck was tested with JUnit & Mockito and run on a Google Cloud Platform Linux Ubuntu 18.04 virtual machine.
 
 Supporting material (test reports and project information) are provided.
