@@ -101,11 +101,15 @@ const clickDeleteDeck = (e) => {
 
 const clickUpdateDeck = (e) => {
     let deckId = e.target.getAttribute('id').substring(0, 1);
-
+    
     sessionStorage.setItem("deckId", deckId);
 
-    makeRequest("GET", HOSTURL + `/Decks/getDeck/${sessionStorage.getItem("deckId")}`)
-        .then((resolve) => { sessionStorage.setItem('deck', resolve) })
+    makeRequest("GET", HOSTURL + `/Decks/getDeck/${deckId}`)
+        .then((resolve) => { 
+            console.log("setting deck")
+            sessionStorage.setItem('deck', resolve) 
+            
+        })
         .catch(function (error) { console.log(error.message) })
 
     location.href = 'update_deck.html';
