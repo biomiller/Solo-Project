@@ -167,6 +167,7 @@ function createNewDeck() {
         .then((resolve) => { location.href = 'user_decks.html' })
         .catch(function (error) { console.log(error.message) })
 
+    return false;
 }
 
 function createNewUser() {
